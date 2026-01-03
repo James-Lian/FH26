@@ -2,16 +2,26 @@
 @import "tailwindcss";
 
 body {
-  position: relative;
   margin: 0;
   overflow: hidden;
-  background: linear-gradient(135deg, #000000, #0e001f);
-  font-size: 5rem;
   font-family: "Pixelify Sans", sans-serif;
   font-weight: 700;
   letter-spacing: 0.1rem;
-  filter: blur(60);
+  background: #000;
 }
+
+/* blurred background only */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #000000, #0e001f);
+  filter: blur(60px);
+  transform: scale(1.15); /* prevents blur edges */
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* App.css / globals.css */
 html {
   scrollbar-gutter: stable;
