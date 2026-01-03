@@ -34,7 +34,6 @@ export default function App() {
         camera={{ position: [0, 0, 5], fov: 75 }}
         style={{
           width: "100vw",
-          height: "100vh",
           display: "block",
         }}
       >
@@ -56,7 +55,7 @@ export default function App() {
               </Suspense>
             </group>
             <Recap3D />
-            <group position={[0, -15, 0]}>
+            <group position={[0, -20, 0]}>
               <Sponsors3D />
             </group>
           </Scroll>

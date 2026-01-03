@@ -29,16 +29,16 @@ export default function IntroText() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="flex flex-row items-center justify-center">
-        <div className="flex flex-col relative w-1/4">
-          <div className="text-white text-4xl flex flex-col mb-12 ">
+      <div className="flex flex-col md:flex-row items-center justify-center">
+        <div className="flex flex-col relative md:w-1/4 w-4/5">
+          <div className="flex justify-center items-center md:items-start text-white text-2xl md:text-3xl lg:text-4xl flex flex-col mb-8 md:mb-10 lg:mb-12">
             Welcome to the{" "}
-            <div className="text-7xl font-bold text-shadow-2xs tracking-widest">
+            <div className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-shadow-2xs tracking-widest">
               Largest
             </div>
             Peel Hackathon
           </div>
-          <div className="text-gray-300 text-lg leading-6">
+          <div className="text-gray-300 text-xs md:text-sm lg:text-lg leading-5 md:leading-6">
             FraserHacks is Mississauga's largest high school hackathon organized
             entirely by students at John Fraser Secondary School. More than 100
             students from all of Peel Region will be coming together on Febuary
@@ -48,15 +48,15 @@ export default function IntroText() {
         </div>
 
         {/* Photobooth stack */}
-        <div className="relative h-[28rem] w-[32rem]">
+        <div className="relative h-[20rem] w-[24rem] sm:h-[16rem] sm:w-[20rem] md:h-[24rem] md:w-[28rem] lg:h-[28rem] lg:w-[32rem]">
           {images.map((image, index) => (
             <img
               key={index}
               src={image.src}
               alt={image.alt}
               className={`
-                w-52 sm:w-56 md:w-64 aspect-[3/4] object-cover
-                bg-white p-2 rounded-lg shadow-2xl ring-1 ring-black/10
+                w-40 md:w-48 lg:w-52 xl:w-56 2xl:w-64 aspect-[3/4] object-cover
+                bg-white p-1.5 md:p-2 rounded-lg shadow-2xl ring-1 ring-black/10
                 transition-all duration-500 ease-out cursor-pointer
                 ${image.className}
                 ${hoveredImage === index ? image.hoverTransform : ""}

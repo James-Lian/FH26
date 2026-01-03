@@ -72,16 +72,16 @@ export default function Navbar() {
       ].join(" ")}
     >
       <div className="flex flex-row justify-center items-center w-full pt-0">
-        <GlassContainer className="flex justify-between items-center w-4/5 mt-8 py-4 px-16 text-white">
-          <div className="text-2xl">
+        <GlassContainer className="flex justify-between items-center w-4/5 mt-4 md:mt-6 lg:mt-8 py-3 px-8 md:py-4 md:px-12 lg:py-4 lg:px-16 text-white">
+          <div className="text-lg md:text-xl lg:text-2xl">
             <NavItem label="FH26" onClick={() => scrollToVH(0)} />
           </div>
 
-          <div className="flex flex-row items-center justify-center gap-6 text-lg">
-            <NavItem label="Intro" onClick={() => scrollToVH(100)} />
-            <NavItem label="Recap" onClick={() => scrollToVH(200)} />
-            <NavItem label="FAQ" onClick={() => scrollToVH(400)} />
-            <NavItem label="Sponsors" onClick={() => scrollToVH(500)} />
+          <div className="flex flex-row items-center justify-center gap-4 md:gap-5 lg:gap-6 text-sm md:text-base lg:text-lg">
+            <NavItem label="Intro" onClick={() => scrollToVH(125)} />
+            <NavItem label="Recap" onClick={() => scrollToVH(230)} />
+            <NavItem label="FAQ" onClick={() => scrollToVH(350)} />
+            <NavItem label="Sponsors" onClick={() => scrollToVH(450)} />
           </div>
         </GlassContainer>
       </div>

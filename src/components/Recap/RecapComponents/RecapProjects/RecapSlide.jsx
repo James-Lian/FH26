@@ -64,20 +64,20 @@ function RecapSlide({ projects, swiperRef, swiperWrapperRef, translateX }) {
               <SwiperSlide key={index}>
                 <GlassContainer
                   translateX={0}
-                  className="relative z-20 flex flex-row py-8 px-16"
+                  className="relative z-20 flex flex-row py-4 px-8 md:py-6 md:px-12 lg:py-8 lg:px-16"
                 >
-                  <div className="pr-4 flex-shrink-0">
+                  <div className="pr-2 md:pr-3 lg:pr-4 flex-shrink-0">
                     <img
                       src={project.image}
                       alt={project.projectName}
-                      className="object-cover rounded-lg h-48 w-64"
+                      className="object-cover rounded-lg h-32 w-44 md:h-40 md:w-56 lg:h-48 lg:w-64"
                     />
                   </div>
-                  <div className="flex flex-col justify-center gap-2 flex-1">
-                    <div className="text-xl font-bold text-white">
+                  <div className="flex flex-col justify-center gap-1 md:gap-2 lg:gap-2 flex-1">
+                    <div className="text-base md:text-lg lg:text-xl font-bold text-white">
                       {project.projectName}
                     </div>
-                    <div className="text-base opacity-70 text-white">
+                    <div className="text-sm md:text-base opacity-70 text-white">
                       {project.makerName}
                     </div>
                   </div>

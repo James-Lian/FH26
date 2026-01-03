@@ -34,7 +34,7 @@ function RecapText() {
         <img
           src="/images/photobooth.jpg"
           alt="Hackathon"
-          className="h-80 object-cover rounded-lg shadow-2xl"
+          className="h-48 w-auto md:h-64 md:w-auto lg:h-80 object-cover rounded-lg shadow-2xl"
           style={{
             boxShadow:
               "0 0 20px rgba(120, 192, 255, 0.2), 0 0 40px rgba(186, 180, 255, 0.15)",
@@ -53,13 +53,13 @@ function RecapText() {
       </div>
 
       <div
-        className="relative z-0"
+        className="relative z-0 hidden md:block"
         style={{ transform: `translateY(-80px) translateX(-20px)` }}
       >
         <img
           src="/images/FH24_1.jpeg"
           alt="Hackathon"
-          className="w-64 h-80 object-cover rounded-lg shadow-2xl"
+          className="w-48 h-60 md:w-56 md:h-72 lg:w-64 lg:h-80 object-cover rounded-lg shadow-2xl"
           style={{
             boxShadow:
               "0 0 20px rgba(120, 192, 255, 0.2), 0 0 40px rgba(186, 180, 255, 0.15)",

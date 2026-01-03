@@ -1,7 +1,7 @@
 function RecapTextbox({ children, translateX = 0, title }) {
   return (
     <div
-      className="max-w-md px-3 py-2 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 overflow-x-auto"
+      className="max-w-md px-2 py-1.5 md:px-3 md:py-2 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 overflow-x-auto"
       style={{
         transform: `translateX(${translateX}px)`,
         boxShadow:
@@ -9,9 +9,9 @@ function RecapTextbox({ children, translateX = 0, title }) {
       }}
     >
       {title && (
-        <div className="text-2xl font-bold text-white mb-2">{title}</div>
+        <div className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-1 md:mb-2 lg:mb-2">{title}</div>
       )}
-      <div className="text-lg text-white leading-8 opacity-70">{children}</div>
+      <div className="text-xs sm:text-base lg:text-lg text-white leading-tight md:leading-7 lg:leading-8 tracking-tight md:tracking-normal opacity-70">{children}</div>
     </div>
   );
 }

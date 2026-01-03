@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { useMemo } from "react";
 import { Text, shaderMaterial } from "@react-three/drei";
 import SponsorTile3D from "./SponsersTile3D";
-import { extend } from "@react-three/fiber";
+import { extend, useThree } from "@react-three/fiber";
 
 const sponsors = [
   // GOLD (2)
@@ -133,14 +133,39 @@ function UnderlineLight({ width, color, y }) {
 }
 
 export default function Sponsors3D({ position = [0, -16, 0] }) {
+  const { viewport } = useThree();
   const grouped = useMemo(() => groupByTier(sponsors), []);
+  
+  // Scale tiles smaller on small screens (viewport.width < 8 is roughly < 768px)
+  const tileScale = viewport.width < 8 ? 0.4 : (viewport.width < 10 ? 0.6 : (viewport.width < 12 ? 0.8:1));
+
+  // Increase height proportionally as scale decreases (inverse relationship)
+  // When scale is 0.4, height multiplier is 1/0.4 = 2.5, when scale is 1.0, height multiplier is 1.0
+  const heightMultiplier = 1 / tileScale;
 
   const gapX = 0.4;
   const gapY = 0.6;
   const titleGap = 0.9;
   const sectionGap = 1.4;
 
-  let cursorY = 0;
+  // First pass: calculate total height to center everything
+  let totalHeight = 0;
+  for (const tier of tierOrder) {
+    const items = grouped[tier] || [];
+    if (!items.length) continue;
+    
+    totalHeight += titleGap; // Title gap
+    const { w, h, cols } = tileSpec[tier];
+    const adjustedH = h * heightMultiplier;
+    const rows = Math.ceil(items.length / cols);
+    totalHeight += rows * (adjustedH + gapY) - gapY; // Tile rows
+    totalHeight += sectionGap; // Section gap
+  }
+  totalHeight -= sectionGap; // Remove last section gap
+
+  // Start positioned toward the bottom (offset downward from center)
+  // Offset by 6 units down from center to position it near the bottom
+  let cursorY = totalHeight / 2 - 6;
   const nodes = [];
 
   for (const tier of tierOrder) {
@@ -173,6 +198,8 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
     cursorY -= titleGap;
 
     const { w, h, cols } = tileSpec[tier];
+    // Apply height multiplier to increase height when scale decreases
+    const adjustedH = h * heightMultiplier;
     const rows = Math.ceil(items.length / cols);
 
     const rowWidth = cols * w + (cols - 1) * gapX;
@@ -183,14 +210,14 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
       const row = Math.floor(i / cols);
 
       const x = startX + col * (w + gapX) + w / 2;
-      const y = cursorY - row * (h + gapY) - h / 2;
+      const y = cursorY - row * (adjustedH + gapY) - adjustedH / 2;
 
       nodes.push(
         <SponsorTile3D
           key={s.id}
           sponsor={s} // includes s.imagePath now
           w={w}
-          h={h}
+          h={adjustedH}
           x={x}
           y={y}
           z={0}
@@ -198,9 +225,17 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
       );
     });
 
-    cursorY -= rows * (h + gapY) - gapY;
+    cursorY -= rows * (adjustedH + gapY) - gapY;
     cursorY -= sectionGap;
   }
 
-  return <group position={position}>{nodes}</group>;
+  // Adjust Y position to anchor the top (title) to a fixed position regardless of scale
+  // When scaled down, we need to move the group up to compensate so the top stays in place
+  const adjustedPosition = [
+    position[0], 
+    position[1] + (1 - tileScale) * 2, 
+    position[2]
+  ];
+
+  return <group position={adjustedPosition} scale={tileScale}>{nodes}</group>;
 }

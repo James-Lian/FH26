@@ -9,6 +9,9 @@ function Recap3D() {
   const { horizontalOffset } = useHorizontalScroll(false);
   const { viewport } = useThree();
   const screenWidth = viewport.width * 1.5;
+  
+  // Scale PlanetRecap3D smaller on small screens (viewport.width < 8 is roughly < 768px)
+  const planetScale = viewport.width < 8 ? 0.7 : 1;
 
   return (
     <>
@@ -17,7 +20,7 @@ function Recap3D() {
           <RecapText3D />
         </Suspense>
       </group>
-      <group position={[horizontalOffset - screenWidth, -16, 0]}>
+      <group position={[horizontalOffset - screenWidth, -16, 0]} scale={planetScale}>
         <Suspense fallback={null}>
           <PlanetRecap3D />
         </Suspense>
