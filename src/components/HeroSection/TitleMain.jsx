@@ -20,7 +20,7 @@ export default function TitleMain() {
         FraserHacks26
       </h1>
       <div className="text-base md:text-lg lg:text-xl xl:text-2xl">
-        <div>March 26, 2025 • In-person event</div>
+        <div>March 26, 2026 • In-person event</div>
         <div className="flex flex-row">
           <div className="font-black mr-2">Largest</div>
           <div>mississuaga highschool hackathon</div>
