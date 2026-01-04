@@ -1,7 +1,7 @@
 // App.jsx
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, AdaptiveDpr } from "@react-three/drei";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import "./App.css";
 
 import HeroSection from "./components/HeroSection/HeroSection";
@@ -24,6 +24,19 @@ const Intro3D = lazy(() => import("./components/Intro/Intro3D"));
 // Component to wrap Recap3D scenes with horizontal offset
 
 export default function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="w-screen h-screen">
       <Navbar />
@@ -39,8 +52,8 @@ export default function App() {
       >
         <ambientLight color="#ffffff" intensity={0.1} />
         <AdaptiveDpr pixelated />
-        <MouseLight />
-        <Background />
+        {!isMobile && <MouseLight />}
+        {!isMobile && <Background />}
 
         <ScrollControls pages={8} damping={0.15}>
           <ScrollController />
