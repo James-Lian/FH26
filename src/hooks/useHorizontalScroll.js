@@ -116,9 +116,30 @@ export const useHorizontalScroll = () => {
         // Determine if swipe is primarily horizontal or vertical
         const absDeltaX = Math.abs(deltaX);
         const absDeltaY = Math.abs(deltaY);
-        const isHorizontalSwipe = absDeltaX > absDeltaY;
+        const isVerticalSwipe = absDeltaY > absDeltaX;
 
-        if (isHorizontalSwipe && isHorizontalMode && !allowNavbarScroll) {
+        if (isVerticalSwipe && isHorizontalMode && !allowNavbarScroll) {
+          // Vertical swipe in horizontal mode - scroll horizontally
+          // Swipe up (negative deltaY) = scroll left, swipe down (positive deltaY) = scroll right
+          event.preventDefault();
+          event.stopPropagation();
+
+          lastTouchX.current = currentX;
+          lastTouchY.current = currentY;
+
+          const currentOffset = targetHorizontalOffset.current;
+          // Convert vertical delta to horizontal scroll delta
+          // Swipe up (negative deltaY) moves left (negative horizontalDelta)
+          // Swipe down (positive deltaY) moves right (positive horizontalDelta)
+          const horizontalDelta = deltaY * scrollDeltaScale * 10; // Scale factor for touch sensitivity
+
+          scrollDirectionHorizontal.current = deltaY > 0 ? "right" : "left";
+
+          targetHorizontalOffset.current = Math.max(
+            minOffset,
+            Math.min(maxOffset, currentOffset + horizontalDelta)
+          );
+        } else if (!isVerticalSwipe && isHorizontalMode && !allowNavbarScroll) {
           // Horizontal swipe in horizontal mode - scroll horizontally
           event.preventDefault();
           event.stopPropagation();
@@ -136,20 +157,10 @@ export const useHorizontalScroll = () => {
             minOffset,
             Math.min(maxOffset, currentOffset + horizontalDelta)
           );
-        } else if (!isHorizontalSwipe) {
-          // Vertical swipe - scroll vertically
-          event.preventDefault();
-          event.stopPropagation();
-
+        } else if (!isHorizontalMode) {
+          // Not in horizontal mode - allow normal vertical scrolling
           lastTouchX.current = currentX;
           lastTouchY.current = currentY;
-
-          // Scroll vertically (swipe up = scroll down, swipe down = scroll up)
-          const scrollAmount = -deltaY * 1.5; // Scale factor for vertical scroll speed (negative so swipe up scrolls down)
-          scrollApi.el.scrollBy({
-            top: scrollAmount,
-            behavior: "auto"
-          });
         } else {
           // Update tracking even if we don't handle it
           lastTouchX.current = currentX;
