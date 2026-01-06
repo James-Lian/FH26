@@ -1,6 +1,6 @@
 <<<<<<< HEAD
-# FH25
-FraserHack25 official website
+# FH26
+FraserHack26 official website
 =======
 # React + Vite
 
