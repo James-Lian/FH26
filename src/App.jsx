@@ -1,4 +1,5 @@
 // App.jsx
+import { Routes, Route } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, AdaptiveDpr } from "@react-three/drei";
 import { Suspense, lazy, useState, useEffect } from "react";
@@ -17,13 +18,12 @@ import Sponsors3D from "./components/Sponsers/Sponsers3D";
 import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
+import Registration from "./pages/Registration";
 
 // Lazy load heavy 3D components
 const Intro3D = lazy(() => import("./components/Intro/Intro3D"));
 
-// Component to wrap Recap3D scenes with horizontal offset
-
-export default function App() {
+function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -98,5 +98,14 @@ export default function App() {
         </ScrollControls>
       </Canvas>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/registration" element={<Registration />} />
+    </Routes>
   );
 }
