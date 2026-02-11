@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { scrollFromNavbar } from "../../hooks/useHorizontalScroll";
 import GlassContainer from "../Recap/RecapComponents/RecapProjects/GlassContainer";
 import NavItem from "./NavItem";
+import RegistrationButton from "./RegistrationButton";
 
 export default function Navbar() {
   const scrollToVH = (vh) => scrollFromNavbar(vh);
@@ -107,6 +108,7 @@ export default function Navbar() {
             <NavItem label="Recap" onClick={() => scrollToVH(230)} />
             <NavItem label="FAQ" onClick={() => scrollToVH(350)} />
             <NavItem label="Sponsors" onClick={() => scrollToVH(450)} />
+            <RegistrationButton />
           </div>
 
           {/* Mobile menu - visible on small screens when open */}

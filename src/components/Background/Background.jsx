@@ -6,7 +6,7 @@ import Delaunator from "delaunator";
 import { Stars } from "@react-three/drei";
 
 // tunables kept the same
-const NUM_POINTS = 100;
+const NUM_POINTS = 75;
 const MIN_DIST = 0.1;
 const NODE_SCALE = 0.025;
 const LINK_RADIUS_BASE = 0.004;
@@ -36,7 +36,7 @@ export default function Background({ worldWidth = 32, worldHeight = 18 }) {
       const x = THREE.MathUtils.randFloatSpread(worldWidth);
       const y = THREE.MathUtils.randFloatSpread(worldHeight);
       const ok = pts.every(
-        (p) => (p.x - x) ** 2 + (p.y - y) ** 2 >= minDist * minDist
+        (p) => (p.x - x) ** 2 + (p.y - y) ** 2 >= minDist * minDist,
       );
       if (ok) {
         const z = THREE.MathUtils.randFloat(Z_MIN, Z_MAX);
@@ -58,7 +58,7 @@ export default function Background({ worldWidth = 32, worldHeight = 18 }) {
     const mid = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
     const quat = new THREE.Quaternion().setFromUnitVectors(
       new THREE.Vector3(0, 1, 0),
-      dir.clone().normalize()
+      dir.clone().normalize(),
     );
     const scale = new THREE.Vector3(radius, len / 2, radius);
     return { position: mid, quaternion: quat, scale, len };
@@ -89,7 +89,7 @@ export default function Background({ worldWidth = 32, worldHeight = 18 }) {
   // positions & velocities
   const points = useMemo(
     () => poissonLikePoints(NUM_POINTS, MIN_DIST),
-    [worldWidth, worldHeight]
+    [worldWidth, worldHeight],
   );
   const velocities = useMemo(() => {
     const v = [];
@@ -98,8 +98,8 @@ export default function Background({ worldWidth = 32, worldHeight = 18 }) {
         new THREE.Vector3(
           THREE.MathUtils.randFloatSpread(SPEED_X),
           THREE.MathUtils.randFloatSpread(SPEED_Y),
-          THREE.MathUtils.randFloatSpread(SPEED_Z)
-        )
+          THREE.MathUtils.randFloatSpread(SPEED_Z),
+        ),
       );
     }
     return v;
@@ -136,7 +136,7 @@ export default function Background({ worldWidth = 32, worldHeight = 18 }) {
         const { position, quaternion, scale } = makeCylinderBetween(
           points[ia],
           points[ib],
-          LINK_RADIUS_BASE
+          LINK_RADIUS_BASE,
         );
         m.compose(position, quaternion, scale);
         linksRef.current.setMatrixAt(i, m);
@@ -201,7 +201,7 @@ export default function Background({ worldWidth = 32, worldHeight = 18 }) {
       const { position, quaternion, scale, len } = makeCylinderBetween(
         a,
         b,
-        LINK_RADIUS_BASE
+        LINK_RADIUS_BASE,
       );
       const t = THREE.MathUtils.clamp(1 - len / 2.0, 0, 1);
       const r = THREE.MathUtils.lerp(LINK_RADIUS_BASE, LINK_RADIUS_MAX, t);

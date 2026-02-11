@@ -1,3 +1,5 @@
+import RegistrationButton from "../Navbar/RegistrationButton";
+
 export default function TitleMain() {
   return (
     <div className="relative mt-24 ml-8 sm:mt-24 sm:ml-24 md:mt-32 md:ml-36 lg:mt-54 lg:ml-48 text-white">
@@ -21,10 +23,11 @@ export default function TitleMain() {
       </h1>
       <div className="text-base md:text-lg lg:text-xl xl:text-2xl">
         <div>March 26, 2026 • In-person event</div>
-        <div className="flex flex-row">
+        <div className="flex flex-row mb-5">
           <div className="font-black mr-2">Largest</div>
           <div>mississuaga highschool hackathon</div>
         </div>
+        <RegistrationButton />
       </div>
     </div>
   );
