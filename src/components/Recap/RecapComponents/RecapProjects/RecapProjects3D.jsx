@@ -25,23 +25,6 @@ function RecapProjects3D() {
           intensity={1}
           scale={0.0002}
         />
-
-        {/* Satellites scattered on left */}
-
-        <Satellite1
-          position={[-6, -1, 2]}
-          lightOffset={[0.3, 0.4, -0.6]}
-          scale={0.008}
-          intensity={0.4}
-        />
-
-        <Satellite2
-          position={[-2, 3.5, 1]}
-          lightOffset={[0.4, -0.3, -0.5]}
-          scale={0.012}
-          intensity={0.5}
-        />
-
         {/* Right side: Large Red Planet */}
         <Planet2
           position={[12, -12, -20]}

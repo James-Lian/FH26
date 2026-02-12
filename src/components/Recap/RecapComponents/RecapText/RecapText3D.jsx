@@ -8,13 +8,6 @@ function RecapText3D() {
   return (
     <>
       <Suspense fallback={null}>
-        {/* Moons scattered around */}
-        <Moon
-          position={[4, -1.5, 1]}
-          lightOffset={[-0.4, 0.6, 0.3]}
-          scale={0.06}
-          intensity={0.2}
-        />
         <Astronaut
           position={[-4, 4, 0]}
           lightOffset={[-2, -3, 2]}
@@ -28,12 +21,7 @@ function RecapText3D() {
           scale={0.008}
           intensity={0.4}
         />
-        <Satellite2
-          position={[3, -3.5, -1.5]}
-          lightOffset={[-0.2, 0.5, 0.7]}
-          scale={0.015}
-          intensity={0.6}
-        />
+
       </Suspense>
     </>
   );

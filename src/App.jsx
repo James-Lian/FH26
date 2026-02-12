@@ -18,7 +18,7 @@ import Sponsors3D from "./components/Sponsers/Sponsers3D";
 import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
-import Registration from "./pages/Registration";
+import Registration from "./pages/registration/Registration";
 
 // Lazy load heavy 3D components
 const Intro3D = lazy(() => import("./components/Intro/Intro3D"));
