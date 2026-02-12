@@ -1,3 +1,5 @@
+import MinecraftNumbers from "../MinecraftNumbers";
+
 export default function NavItem({ label, onClick }) {
   return (
     <button
@@ -18,7 +20,7 @@ export default function NavItem({ label, onClick }) {
           `,
         }}
       >
-        {label}
+        <MinecraftNumbers>{label}</MinecraftNumbers>
       </span>
 
       {/* main text moves up on hover */}
@@ -30,7 +32,7 @@ export default function NavItem({ label, onClick }) {
                    group-hover:bg-gradient-to-r group-hover:from-blue-100
                    group-hover:via-fuchsia-300 group-hover:to-purple-500"
       >
-        {label}
+        <MinecraftNumbers>{label}</MinecraftNumbers>
       </span>
     </button>
   );

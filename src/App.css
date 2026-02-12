@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
+/* Local font: public/fonts/Minecraft.ttf (used for digits 0-9 only) */
+@font-face {
+  font-family: "Minecraft";
+  src: url("/fonts/Minecraft.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+0030-0039; /* 0-9 */
+}
+
 body {
   margin: 0;
   overflow: hidden;
@@ -20,6 +29,13 @@ body::before {
   transform: scale(1.15); /* prevents blur edges */
   z-index: -1;
   pointer-events: none;
+}
+
+/* Minecraft digits only: slightly smaller, slightly more letter-spacing */
+.minecraft-nums {
+  font-family: "Minecraft", sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 0.12rem;
 }
 
 /* App.css / globals.css */

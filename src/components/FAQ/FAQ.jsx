@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import GlassContainer from "../Recap/RecapComponents/RecapProjects/GlassContainer";
+import MinecraftNumbers from "../MinecraftNumbers";
 
 const DEFAULT_FAQ = [
   {
@@ -133,7 +134,7 @@ export default function FAQ({
                 >
                   <div className="min-h-0">
                     <p className="text-xs md:text-base leading-5 md:leading-6 lg:leading-6 text-zinc-400">
-                      {item.a}
+                      <MinecraftNumbers>{item.a}</MinecraftNumbers>
                     </p>
                   </div>
                 </div>

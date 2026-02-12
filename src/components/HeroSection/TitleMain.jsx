@@ -1,4 +1,5 @@
 import RegistrationButton from "../Navbar/RegistrationButton";
+import MinecraftNumbers from "../MinecraftNumbers";
 
 export default function TitleMain() {
   return (
@@ -16,13 +17,13 @@ export default function TitleMain() {
       `,
         }}
       >
-        FraserHacks26
+        <MinecraftNumbers>FraserHacks26</MinecraftNumbers>
       </span>
       <h1 className="text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-100 via-fuchsia-300 to-purple-500 ">
-        FraserHacks26
+        <MinecraftNumbers>FraserHacks26</MinecraftNumbers>
       </h1>
       <div className="text-base md:text-lg lg:text-xl xl:text-2xl">
-        <div>March 26, 2026 • In-person event</div>
+        <div><MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event</div>
         <div className="flex flex-row mb-5">
           <div className="font-black mr-2">Largest</div>
           <div>mississuaga highschool hackathon</div>
