@@ -13,8 +13,8 @@ import IntroText from "./components/Intro/IntroText";
 import Recap3D from "./components/Recap/Recap3d";
 import RecapText from "./components/Recap/RecapComponents/RecapText/RecapText";
 import RecapProjects from "./components/Recap/RecapComponents/RecapProjects/RecapProjects";
-import Sponsers from "./components/Sponsers/Sponsers";
-import Sponsors3D from "./components/Sponsers/Sponsers3D";
+// import Sponsers from "./components/Sponsers/Sponsers";
+// import Sponsors3D from "./components/Sponsers/Sponsers3D";
 import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
@@ -84,9 +84,9 @@ function HomePage() {
               </Suspense>
             </group>
             <Recap3D />
-            <group position={[0, -20, 0]}>
+            {/* <group position={[0, -20, 0]}>
               <Sponsors3D />
-            </group>
+            </group> */}
           </Scroll>
 
           {/* HTML overlay that scrolls */}
@@ -107,9 +107,9 @@ function HomePage() {
             <section style={{ height: "100vh", width: "100vw" }}>
               <FAQ />
             </section>
-            <section style={{ height: "200vh", width: "100vw" }}>
+            {/* <section style={{ height: "200vh", width: "100vw" }}>
               <Sponsers />
-            </section>
+            </section> */}
           </Scroll>
         </ScrollControls>
       </Canvas>
