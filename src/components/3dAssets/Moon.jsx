@@ -18,6 +18,7 @@ export default function Moon({
   return (
     <group position={position} ref={ref}>
       <primitive object={cloned} scale={scale} dispose={null} />
+      {intensity > 0 && (
       <pointLight
         color="#ffffff"
         intensity={intensity}
@@ -27,6 +28,7 @@ export default function Moon({
         shadow-mapSize-height={1024}
         position={lightOffset}
       />
+      )}
     </group>
   );
 }

@@ -111,7 +111,7 @@ const renderMoon = (object) => (
       position={[0, 0, 0]}
       scale={object.scale}
       lightOffset={[0, 1, 1.8]}
-      intensity={0.7}
+      intensity={0}
     />
   </group>
 );

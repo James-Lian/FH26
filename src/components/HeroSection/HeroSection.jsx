@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import Moon from "../3dAssets/Moon";
 import Sun from "../3dAssets/Sun";
 import Astronaut from "../3dAssets/Astronaut";
-import Laptop from "../3dAssets/Laptop";
 import ISS from "../3dAssets/ISS";
 
 function HeroSection() {
@@ -11,7 +10,6 @@ function HeroSection() {
     <>
       <Suspense fallback={null}>
         <Astronaut position={[-3, 1.3, 1]} scale={0.0002} />
-        <Laptop position={[-2.3, 1.3, 1]} scale={0.0002} />
         <Planet position={[0, 0, -1]} scale={0.24} />
         <Moon
           position={[3, 1, 1]}
