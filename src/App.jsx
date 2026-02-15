@@ -1,5 +1,5 @@
 // App.jsx
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, AdaptiveDpr } from "@react-three/drei";
 import { Suspense, lazy, useState, useEffect } from "react";
@@ -19,12 +19,25 @@ import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
 import Registration from "./pages/registration/Registration";
+import RegisteredSuccessBanner from "./components/Registration/RegisteredSuccessBanner";
 
 // Lazy load heavy 3D components
 const Intro3D = lazy(() => import("./components/Intro/Intro3D"));
 
 function HomePage() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
+  const [showSuccessBanner, setShowSuccessBanner] = useState(
+    () => !!location.state?.registrationSuccess
+  );
+
+  useEffect(() => {
+    if (location.state?.registrationSuccess) {
+      setShowSuccessBanner(true);
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location.state?.registrationSuccess, location.pathname, navigate]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -39,6 +52,9 @@ function HomePage() {
 
   return (
     <div className="w-screen h-screen">
+      {showSuccessBanner && (
+        <RegisteredSuccessBanner onDismiss={() => setShowSuccessBanner(false)} />
+      )}
       <Navbar />
 
       <Canvas

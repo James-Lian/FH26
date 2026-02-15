@@ -1,4 +1,5 @@
 import { useState, useEffect, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { AdaptiveDpr } from "@react-three/drei";
 import BackLink from "../../components/Registration/BackLink";
@@ -10,7 +11,15 @@ import MouseLight from "../../components/MouseLight/MouseLight";
 import Astronaut from "../../components/3dAssets/Astronaut";
 
 export default function Registration() {
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    school: "",
+    dietaryRestrictions: "",
+    additionalQuestions: "",
+  });
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -19,10 +28,8 @@ export default function Registration() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    // TODO: submit registration
-  }
+  const updateField = (name, value) =>
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
   return (
     <div className="w-screen h-screen relative">
@@ -49,22 +56,62 @@ export default function Registration() {
             <h1 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
               Register
             </h1>
-            <form onSubmit={handleSubmit}>
-              <AuthField label="Full name" id="full-name" placeholder="John Doe" required />
-              <AuthField label="Email" type="email" id="email" placeholder="you@example.com" required />
-              <AuthField label="School" id="school" placeholder="Your school name" required />
+            <form onSubmit={(e) => e.preventDefault()}>
+              <AuthField
+                label="Full name"
+                id="full-name"
+                name="fullName"
+                value={formData.fullName}
+                onChange={(e) => updateField("fullName", e.target.value)}
+                placeholder="John Doe"
+                required
+              />
+              <AuthField
+                label="Email"
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={(e) => updateField("email", e.target.value)}
+                placeholder="you@example.com"
+                required
+              />
+              <AuthField
+                label="School"
+                id="school"
+                name="school"
+                value={formData.school}
+                onChange={(e) => updateField("school", e.target.value)}
+                placeholder="Your school name"
+                required
+              />
               <AuthField
                 label="Dietary restrictions"
                 id="dietary"
+                name="dietaryRestrictions"
+                value={formData.dietaryRestrictions}
+                onChange={(e) => updateField("dietaryRestrictions", e.target.value)}
                 placeholder="e.g. vegetarian, allergies, none"
               />
               <AuthField
                 label="Additional questions / concerns"
                 id="additional"
+                name="additionalQuestions"
                 as="textarea"
+                value={formData.additionalQuestions}
+                onChange={(e) => updateField("additionalQuestions", e.target.value)}
                 placeholder="Anything else we should know?"
               />
-              <SubmitButton>Submit</SubmitButton>
+              <SubmitButton
+                fullName={formData.fullName}
+                email={formData.email}
+                school={formData.school}
+                dietaryRestrictions={formData.dietaryRestrictions}
+                additionalQuestions={formData.additionalQuestions}
+                onSuccess={() => navigate("/", { state: { registrationSuccess: true } })}
+              >
+                Submit
+              </SubmitButton>
             </form>
           </GradientBorder>
         </div>

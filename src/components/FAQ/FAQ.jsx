@@ -5,7 +5,7 @@ import MinecraftNumbers from "../MinecraftNumbers";
 const DEFAULT_FAQ = [
   {
     q: "WHO IS THIS EVENT FOR?",
-    a: "Anyone with an open mindset can participate. If you are a beginner at programming, designing, pitching or even quite experienced, this hackathon is for you! Note that only students from Peel District School Board are eligible to participate.",
+    a: "Anyone with an open mindset can participate. If you are a beginner at programming, designing, pitching or even quite experienced, this hackathon is for you!",
   },
   {
     q: "WILL THERE BE FOOD?",
