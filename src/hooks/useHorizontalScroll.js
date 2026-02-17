@@ -8,8 +8,8 @@ const HORIZONTAL_SCROLL_CONFIG = {
   transitionSpeed: 0.05,
   scrollDeltaScale: 0.01,
   recapSection: {
-    start: 0.26,
-    end: 0.27,
+    start: 0.46,
+    end: 0.47,
     entryBuffer: 0.08,
   },
 };
@@ -251,7 +251,7 @@ export const useHorizontalScroll = () => {
         setIsHorizontalMode(false);
       } else {
         setIsHorizontalMode(true);
-        const target = scroll.el.scrollHeight * 0.26;
+        const target = scroll.el.scrollHeight * 0.43;
         scroll.el.scrollTo({ top: target, behavior: "instant" });
         scrollDirection.current = null;
       }

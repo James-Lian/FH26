@@ -104,10 +104,9 @@ export default function Navbar() {
 
           {/* Desktop navigation - hidden on small screens */}
           <div className="hidden md:flex flex-row items-center justify-center gap-4 md:gap-5 lg:gap-6 text-sm md:text-base lg:text-lg">
-            <NavItem label="Intro" onClick={() => scrollToVH(125)} />
-            <NavItem label="Recap" onClick={() => scrollToVH(230)} />
-            <NavItem label="FAQ" onClick={() => scrollToVH(350)} />
-            <NavItem label="Sponsors" onClick={() => scrollToVH(450)} />
+            <NavItem label="Intro" onClick={() => scrollToVH(140)} />
+            <NavItem label="Recap" onClick={() => scrollToVH(260)} />
+            <NavItem label="FAQ" onClick={() => scrollToVH(390)} />
             <RegistrationButton />
           </div>
 
@@ -129,31 +128,26 @@ export default function Navbar() {
               <NavItem
                 label="Intro"
                 onClick={() => {
-                  scrollToVH(125);
+                  scrollToVH(140);
                   setMenuOpen(false);
                 }}
               />
               <NavItem
                 label="Recap"
                 onClick={() => {
-                  scrollToVH(230);
+                  scrollToVH(260);
                   setMenuOpen(false);
                 }}
               />
               <NavItem
                 label="FAQ"
                 onClick={() => {
-                  scrollToVH(350);
+                  scrollToVH(390);
                   setMenuOpen(false);
                 }}
               />
-              <NavItem
-                label="Sponsors"
-                onClick={() => {
-                  scrollToVH(450);
-                  setMenuOpen(false);
-                }}
-              />
+            <RegistrationButton />
+
             </div>
           </div>
         </GlassContainer>

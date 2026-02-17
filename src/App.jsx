@@ -71,7 +71,7 @@ function HomePage() {
         {!isMobile && <MouseLight />}
         {!isMobile && <Background />}
 
-        <ScrollControls pages={8} damping={0.15}>
+        <ScrollControls pages={5} damping={0.15}>
           <ScrollController />
 
           <Scroll>
