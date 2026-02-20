@@ -14,14 +14,6 @@ export default function Planet2({ position = [0, 0, 0], scale = 1, ...props }) {
   return (
     <group position={position} rotation={[0, 60, 0]} {...props}>
       <primitive object={cloned} scale={scale} dispose={null} />
-      {/* Additional point light for natural illumination */}
-      <pointLight
-        color="#ff6b4a"
-        intensity={2}
-        distance={20}
-        decay={2}
-        position={[0, 2, 5]}
-      />
     </group>
   );
 }

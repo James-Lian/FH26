@@ -18,12 +18,6 @@ export default function Satellite1({
   return (
     <group position={position}>
       <primitive object={cloned} scale={scale} dispose={null} />
-      <pointLight
-        color="#ffffff"
-        intensity={intensity}
-        decay={2}
-        position={lightOffset}
-      />
     </group>
   );
 }

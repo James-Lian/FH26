@@ -7,8 +7,6 @@ import { SkeletonUtils } from "three-stdlib"; // safe clone for skinned/animated
 export default function Satellite2({
   position = [0, 0, 0],
   scale = 1,
-  lightOffset = [0, 0, 0],
-  intensity,
 }) {
   const groupRef = useRef();
   const modelRef = useRef();
@@ -42,12 +40,6 @@ export default function Satellite2({
       <group ref={modelRef}>
         <primitive object={cloned} scale={scale} dispose={null} />
       </group>
-      <pointLight
-        color="#ffffff"
-        intensity={intensity}
-        decay={2}
-        position={lightOffset}
-      />
     </group>
   );
 }

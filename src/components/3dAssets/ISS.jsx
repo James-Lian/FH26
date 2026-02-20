@@ -42,12 +42,6 @@ export default function ISS({
       <group ref={modelRef}>
         <primitive object={cloned} scale={scale} dispose={null} />
       </group>
-      <pointLight
-        color="#ffffff"
-        intensity={intensity}
-        decay={2}
-        position={lightOffset}
-      />
     </group>
   );
 }
