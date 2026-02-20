@@ -10,17 +10,9 @@ import Astronaut from "../../3dAssets/Astronaut";
 // Configuration for orbital objects
 const getOrbitalObjects = () => [
   {
-    type: "Moon",
-    text: "last year we had...",
-    angle: 0, // 0 degrees
-    heightOffset: 0,
-    scale: 0.12,
-    orbitDistance: 4.3,
-  },
-  {
     type: "Asteroid1",
     text: "100+ participants",
-    angle: 50,
+    angle: 0,
     heightOffset: -0.1,
     scale: 1.2,
     orbitDistance: 4.7,
@@ -28,7 +20,7 @@ const getOrbitalObjects = () => [
   {
     type: "Asteroid2",
     text: "30+ projects",
-    angle: 110,
+    angle: 60,
     heightOffset: -0.05,
     scale: 2.8,
     orbitDistance: 4.4,
@@ -36,7 +28,7 @@ const getOrbitalObjects = () => [
   {
     type: "Asteroid1",
     text: "20+ sponsors",
-    angle: 160,
+    angle: 120,
     heightOffset: -0.5,
     scale: 1.2,
     orbitDistance: 4.6,
@@ -44,7 +36,7 @@ const getOrbitalObjects = () => [
   {
     type: "Asteroid2",
     text: "1000+ dollars in prizes",
-    angle: 210,
+    angle: 180,
     heightOffset: 0.5,
     scale: 2.8,
     orbitDistance: 4.5,
@@ -52,7 +44,7 @@ const getOrbitalObjects = () => [
   {
     type: "Asteroid1",
     text: "10000+ lines of code",
-    angle: 270,
+    angle: 240,
     heightOffset: -0.05,
     scale: 1.2,
     orbitDistance: 4.8,
@@ -60,7 +52,7 @@ const getOrbitalObjects = () => [
   {
     type: "Asteroid2",
     text: "10+ judges",
-    angle: 310,
+    angle: 280,
     heightOffset: 0.2,
     scale: 2.8,
     orbitDistance: 4.2,
@@ -217,8 +209,19 @@ function PlanetRecap3D() {
     <>
       <Suspense fallback={null}>
         <group position={[0, -1.5, 0]}>
-        <CentralEarth />
-        <OrbitalBelt
+          <Text
+            position={[-5, 5, -1]}
+            fontSize={0.75}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+            font="/fonts/PixelifySans-Medium.ttf"
+            maxWidth={4}
+          >
+            Last year we had...
+          </Text>
+          <CentralEarth />
+          <OrbitalBelt
             moonPositions={moonPositions}
             orbitalObjects={orbitalObjects}
           />

@@ -5,6 +5,7 @@ import { AdaptiveDpr } from "@react-three/drei";
 import BackLink from "../../components/Registration/BackLink";
 import GradientBorder from "../../components/Registration/GradientBorder";
 import AuthField from "../../components/Registration/AuthField";
+import SchoolSelector from "../../components/Registration/SchoolSelector";
 import SubmitButton from "../../components/Registration/SubmitButton";
 import Background from "../../components/Background/Background";
 import MouseLight from "../../components/MouseLight/MouseLight";
@@ -76,13 +77,10 @@ export default function Registration() {
                 placeholder="you@example.com"
                 required
               />
-              <AuthField
-                label="School"
+              <SchoolSelector
                 id="school"
-                name="school"
                 value={formData.school}
-                onChange={(e) => updateField("school", e.target.value)}
-                placeholder="Your school name"
+                onChange={(v) => updateField("school", v)}
                 required
               />
               <AuthField
