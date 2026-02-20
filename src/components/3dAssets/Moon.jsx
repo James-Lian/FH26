@@ -23,8 +23,6 @@ export default function Moon({
         color="#ffffff"
         intensity={intensity}
         decay={2}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
         position={lightOffset}
       />
       )}
