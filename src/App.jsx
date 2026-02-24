@@ -29,7 +29,7 @@ function HomePage() {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [showSuccessBanner, setShowSuccessBanner] = useState(
-    () => !!location.state?.registrationSuccess
+    () => !!location.state?.registrationSuccess,
   );
 
   useEffect(() => {
@@ -43,22 +43,23 @@ function HomePage() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
     <div className="w-screen h-screen">
       {showSuccessBanner && (
-        <RegisteredSuccessBanner onDismiss={() => setShowSuccessBanner(false)} />
+        <RegisteredSuccessBanner
+          onDismiss={() => setShowSuccessBanner(false)}
+        />
       )}
       <Navbar />
 
       <Canvas
-        dpr={[1, 2]}
         gl={{ antialias: true, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 5], fov: 75 }}
         style={{

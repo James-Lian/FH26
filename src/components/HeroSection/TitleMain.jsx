@@ -23,10 +23,12 @@ export default function TitleMain() {
         <MinecraftNumbers>FraserHacks26</MinecraftNumbers>
       </h1>
       <div className="text-base md:text-lg lg:text-xl xl:text-2xl">
-        <div><MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event</div>
+        <div>
+          <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event
+        </div>
         <div className="flex flex-row mb-5">
           <div className="font-black mr-2">Largest</div>
-          <div>mississuaga highschool hackathon</div>
+          <div>Mississauga highschool hackathon</div>
         </div>
         <RegistrationButton />
       </div>
