@@ -5,21 +5,26 @@ import { doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
 // Inside the document: { safeEmailKey: { userObj } }
 export const addRegistrationGroupedBySchool = async ({
   fullName,
-  email,
+  schoolEmail,
+  personalEmail,
   school,
+  experience,
+  tshirtSize,
   dietaryRestrictions,
   additionalQuestions,
 }) => {
   const userObj = {
     fullName,
-    email,
+    schoolEmail,
+    personalEmail,
     school,
+    experience,
+    tshirtSize,
     dietaryRestrictions,
     additionalQuestions,
   };
 
-
-  const safeEmailKey = email.replaceAll(".", "_");
+  const safeEmailKey = schoolEmail.trim().toLowerCase().replaceAll(".", "_");
 
   const schoolDocRef = doc(db, "registrationsBySchool", school);
 
@@ -34,24 +39,21 @@ export const addRegistrationGroupedBySchool = async ({
   return true;
 };
 
-// Checks if email exists inside a school's document
+// Checks if school email exists in any school document (one registration per school email globally)
+export const emailExistsGlobally = async (schoolEmail) => {
+  if (!schoolEmail) return false;
 
-export const emailExistsGlobally = async (email) => {
-    if (!email) return false;
-  
-    const safeEmailKey = email.trim().toLowerCase().replaceAll(".", "_");
-  
-    // Pull every school document
-    const snapshot = await getDocs(collection(db, "registrationsBySchool"));
-  
-    // Check if any school doc has a field matching the email key
-    for (const docSnap of snapshot.docs) {
-      const data = docSnap.data();
-      if (data && data[safeEmailKey] !== undefined) {
-        return true;
-      }
+  const safeEmailKey = schoolEmail.trim().toLowerCase().replaceAll(".", "_");
+
+  const snapshot = await getDocs(collection(db, "registrationsBySchool"));
+
+  for (const docSnap of snapshot.docs) {
+    const data = docSnap.data();
+    if (data && data[safeEmailKey] !== undefined) {
+      return true;
     }
-  
-    return false;
-  };
+  }
+
+  return false;
+};
 

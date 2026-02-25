@@ -5,7 +5,7 @@ export default function RegisteredSuccessBanner({ onDismiss }) {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setIsExiting(true), 5000);
+    const t = setTimeout(() => setIsExiting(true), 10000);
     return () => clearTimeout(t);
   }, []);
 
@@ -28,7 +28,9 @@ export default function RegisteredSuccessBanner({ onDismiss }) {
     >
       <GradientBorder className="w-full" compact>
         <div className="flex items-center justify-between gap-4">
-          <span className="font-semibold text-white text-base">Registered successfully!</span>
+          <span className="font-semibold text-white text-base">
+          Check your email for a confirmation email from hi@fraserhacks.dev in a couple weeks!
+          </span>
           <button
             type="button"
             onClick={handleClose}

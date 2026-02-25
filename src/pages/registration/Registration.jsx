@@ -1,26 +1,59 @@
 import { useState, useEffect, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
-import { AdaptiveDpr } from "@react-three/drei";
+import { ScrollControls, Scroll, AdaptiveDpr } from "@react-three/drei";
 import BackLink from "../../components/Registration/BackLink";
 import GradientBorder from "../../components/Registration/GradientBorder";
 import AuthField from "../../components/Registration/AuthField";
 import SchoolSelector from "../../components/Registration/SchoolSelector";
+import ExperienceSelector from "../../components/Registration/ExperienceSelector";
+import TShirtSizeSelector from "../../components/Registration/TShirtSizeSelector";
 import SubmitButton from "../../components/Registration/SubmitButton";
+import { addRegistrationGroupedBySchool, emailExistsGlobally } from "../../tools/firebase";
 import Background from "../../components/Background/Background";
 import MouseLight from "../../components/MouseLight/MouseLight";
 import Astronaut from "../../components/3dAssets/Astronaut";
+import ScrollController, { scrollApi } from "../../components/Navbar/ScrollController";
 
 export default function Registration() {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
+    schoolEmail: "",
+    personalEmail: "",
     school: "",
+    experience: "",
+    tshirtSize: "",
     dietaryRestrictions: "",
     additionalQuestions: "",
   });
+  const [submitAttempted, setSubmitAttempted] = useState(false);
+
+  const isFormValid = () =>
+    formData.fullName.trim() !== "" &&
+    formData.schoolEmail.trim() !== "" &&
+    formData.school.trim() !== "" &&
+    formData.tshirtSize.trim() !== "";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitAttempted(true);
+    if (!isFormValid()) return;
+    const exists = await emailExistsGlobally(formData.schoolEmail);
+    if (exists) return;
+    await addRegistrationGroupedBySchool({
+      fullName: formData.fullName,
+      schoolEmail: formData.schoolEmail,
+      personalEmail: formData.personalEmail,
+      school: formData.school,
+      experience: formData.experience,
+      tshirtSize: formData.tshirtSize,
+      dietaryRestrictions: formData.dietaryRestrictions,
+      additionalQuestions: formData.additionalQuestions,
+    });
+    navigate("/", { state: { registrationSuccess: true } });
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -28,6 +61,12 @@ export default function Registration() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (!submitAttempted || isFormValid()) return;
+    const scrollEl = scrollApi?.el;
+    if (scrollEl) scrollEl.scrollTo({ top: 0, behavior: "smooth" });
+  }, [submitAttempted, formData.fullName, formData.schoolEmail, formData.school, formData.tshirtSize]);
 
   const updateField = (name, value) =>
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -45,75 +84,105 @@ export default function Registration() {
         {!isMobile && <Background />}
         {!isMobile && <MouseLight />}
         <Suspense fallback={null}>
-          <Astronaut position={[-3, 1.3, 1.5]} scale={0.0002} intensity={0.5} />
+            <Astronaut position={[-3, 1.3, 1.5]} scale={0.0002} intensity={0.5} />
         </Suspense>
+        <ScrollControls pages={1.5} damping={0.15}>
+          <ScrollController />
+
+          <Scroll html>
+          <section style={{ height: "150vh", width: "100vw" }}>
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 pointer-events-none">
+            <div className="absolute top-6 left-6 pointer-events-auto">
+              <BackLink />
+            </div>
+            <div className="pointer-events-auto w-full max-w-md">
+              <GradientBorder className="w-full">
+                <h1 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
+                  Register
+                </h1>
+                <form onSubmit={handleSubmit}>
+                  <AuthField
+                    label="Full name"
+                    id="full-name"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={(e) => updateField("fullName", e.target.value)}
+                    placeholder="John Doe"
+                    required
+                    error={submitAttempted && !formData.fullName.trim()}
+                  />
+                  <AuthField
+                    label="School email"
+                    id="school-email"
+                    name="schoolEmail"
+                    type="email"
+                    value={formData.schoolEmail}
+                    onChange={(e) => updateField("schoolEmail", e.target.value)}
+                    placeholder="you@school.edu"
+                    required
+                    error={submitAttempted && !formData.schoolEmail.trim()}
+                  />
+                  <AuthField
+                    label="Personal email"
+                    id="personal-email"
+                    name="personalEmail"
+                    type="email"
+                    value={formData.personalEmail}
+                    onChange={(e) => updateField("personalEmail", e.target.value)}
+                    placeholder="you@example.com"
+                    required={false}
+                  />
+                  <SchoolSelector
+                    id="school"
+                    value={formData.school}
+                    onChange={(v) => updateField("school", v)}
+                    required
+                    error={submitAttempted && !formData.school.trim()}
+                  />
+                  <ExperienceSelector
+                    id="experience"
+                    value={formData.experience}
+                    onChange={(v) => updateField("experience", v)}
+                  />
+                  <TShirtSizeSelector
+                    id="tshirt-size"
+                    value={formData.tshirtSize}
+                    onChange={(v) => updateField("tshirtSize", v)}
+                    required
+                    error={submitAttempted && !formData.tshirtSize.trim()}
+                  />
+                  <p className="text-white/60 text-sm mb-4">No experience required.</p>
+                  <AuthField
+                    label="Dietary restrictions"
+                    id="dietary"
+                    name="dietaryRestrictions"
+                    value={formData.dietaryRestrictions}
+                    onChange={(e) => updateField("dietaryRestrictions", e.target.value)}
+                    placeholder="e.g. vegetarian, allergies, none"
+                    required={false}
+                  />
+                  <AuthField
+                    label="Additional questions / concerns"
+                    id="additional"
+                    name="additionalQuestions"
+                    as="textarea"
+                    value={formData.additionalQuestions}
+                    onChange={(e) => updateField("additionalQuestions", e.target.value)}
+                    placeholder="Anything else we should know?"
+                    required={false}
+                  />
+                  <SubmitButton>Submit</SubmitButton>
+                  <p className="text-white/60 text-xs text-center mt-4">
+                    This hackathon may cost up to $10 to participate. We're working hard to make it free!
+                  </p>
+                </form>
+              </GradientBorder>
+            </div>
+          </div>
+          </section>
+        </Scroll>
+      </ScrollControls>
       </Canvas>
-      <div className="absolute inset-0 flex flex-col items-center justify-center p-4 pointer-events-none">
-        <div className="absolute top-6 left-6 pointer-events-auto">
-          <BackLink />
-        </div>
-        <div className="pointer-events-auto w-full max-w-md">
-          <GradientBorder className="w-full">
-            <h1 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
-              Register
-            </h1>
-            <form onSubmit={(e) => e.preventDefault()}>
-              <AuthField
-                label="Full name"
-                id="full-name"
-                name="fullName"
-                value={formData.fullName}
-                onChange={(e) => updateField("fullName", e.target.value)}
-                placeholder="John Doe"
-                required
-              />
-              <AuthField
-                label="Email"
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) => updateField("email", e.target.value)}
-                placeholder="you@example.com"
-                required
-              />
-              <SchoolSelector
-                id="school"
-                value={formData.school}
-                onChange={(v) => updateField("school", v)}
-                required
-              />
-              <AuthField
-                label="Dietary restrictions"
-                id="dietary"
-                name="dietaryRestrictions"
-                value={formData.dietaryRestrictions}
-                onChange={(e) => updateField("dietaryRestrictions", e.target.value)}
-                placeholder="e.g. vegetarian, allergies, none"
-              />
-              <AuthField
-                label="Additional questions / concerns"
-                id="additional"
-                name="additionalQuestions"
-                as="textarea"
-                value={formData.additionalQuestions}
-                onChange={(e) => updateField("additionalQuestions", e.target.value)}
-                placeholder="Anything else we should know?"
-              />
-              <SubmitButton
-                fullName={formData.fullName}
-                email={formData.email}
-                school={formData.school}
-                dietaryRestrictions={formData.dietaryRestrictions}
-                additionalQuestions={formData.additionalQuestions}
-                onSuccess={() => navigate("/", { state: { registrationSuccess: true } })}
-              >
-                Submit
-              </SubmitButton>
-            </form>
-          </GradientBorder>
-        </div>
-      </div>
     </div>
   );
 }

@@ -29,7 +29,7 @@ const DEFAULT_FAQ = [
   },
   {
     q: "ANY QUESTIONS WE DIDN'T ANSWER?",
-    a: "You can contact us at fraserhacks24@gmail.com if you have any more questions.",
+    a: "You can contact us at hi@fraserhacks.dev if you have any more questions.",
   },
 ];
 
