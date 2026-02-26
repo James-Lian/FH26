@@ -171,10 +171,10 @@ export default function Registration() {
                     placeholder="Anything else we should know?"
                     required={false}
                   />
-                  <SubmitButton>Submit</SubmitButton>
                   <p className="text-white/60 text-xs text-center mt-4">
-                    This hackathon may cost up to $10 to participate. We're working hard to make it free!
+                    This hackathon may cost up to $10 to participate for non-JFSS students. We're working hard to make it free!
                   </p>
+                  <SubmitButton>Submit</SubmitButton>
                 </form>
               </GradientBorder>
             </div>
