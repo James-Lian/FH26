@@ -11,7 +11,7 @@ function RedGradientBorder({ children }) {
   );
 }
 
-export default function AuthField({ label, id, type = "text", as = "input", required, error, ...props }) {
+export default function AuthField({ label, id, type = "text", as = "input", required, error, errorMessage, ...props }) {
   const hasError = error && required;
   const InputOrTextarea = as === "textarea" ? (
     <textarea id={id} className={`${inputClass} min-h-[100px] resize-none`} {...props} />
@@ -23,7 +23,7 @@ export default function AuthField({ label, id, type = "text", as = "input", requ
       <label htmlFor={id} className="block text-sm font-medium text-white/90 mb-1">
         {label}
         {required === true && <span className="text-purple-400"> *</span>}
-        {hasError && <span className="text-red-400"> required</span>}
+        {hasError && <span className="text-red-400"> {errorMessage != undefined ? errorMessage : "required"}</span>}
         {required === false && <span className="text-white/50 font-normal"> (optional)</span>}
       </label>
       {hasError ? <RedGradientBorder>{InputOrTextarea}</RedGradientBorder> : InputOrTextarea}

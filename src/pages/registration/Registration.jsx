@@ -29,7 +29,7 @@ export default function Registration() {
     additionalQuestions: "",
   });
   const [submitAttempted, setSubmitAttempted] = useState(false);
-
+  const [exists, setExists] = useState(false);
   const isFormValid = () =>
     formData.fullName.trim() !== "" &&
     formData.schoolEmail.trim() !== "" &&
@@ -40,8 +40,13 @@ export default function Registration() {
     e.preventDefault();
     setSubmitAttempted(true);
     if (!isFormValid()) return;
-    const exists = await emailExistsGlobally(formData.schoolEmail);
-    if (exists) return;
+    const emailExists = await emailExistsGlobally(formData.schoolEmail);
+    if (emailExists){
+      setExists(true);
+      return;
+    } else {
+      setExists(false);
+    }
     await addRegistrationGroupedBySchool({
       fullName: formData.fullName,
       schoolEmail: formData.schoolEmail,
@@ -120,7 +125,8 @@ export default function Registration() {
                     onChange={(e) => updateField("schoolEmail", e.target.value)}
                     placeholder="you@school.edu"
                     required
-                    error={submitAttempted && !formData.schoolEmail.trim()}
+                    error={submitAttempted && (!formData.schoolEmail.trim() || exists)}
+                    errorMessage={exists ? "This email is already registered" : undefined}
                   />
                   <AuthField
                     label="Personal email"
