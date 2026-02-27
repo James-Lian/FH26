@@ -30,7 +30,10 @@ export default function TitleMain() {
           <div className="font-black mr-2">Largest</div>
           <div>Mississauga highschool hackathon</div>
         </div>
-        <RegistrationButton />
+        <div className="flex flex-row">
+          <RegistrationButton />
+          <div className="font-black ml-3">(Due March 15th, 2026!)</div>
+        </div>
       </div>
     </div>
   );
