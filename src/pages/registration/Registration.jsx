@@ -61,8 +61,8 @@ export default function Registration() {
 
     try {
       const data = {
-        to: schoolEmail,
-        cc: personalEmail ? personalEmail : undefined,
+        to: formData.schoolEmail,
+        cc: formData.personalEmail ? formData.personalEmail : undefined,
         name: formData.fullName,
       }
       const response = await fetch('/api/registrationConfirmed', {
