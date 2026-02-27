@@ -32,7 +32,7 @@ export default function TitleMain() {
         </div>
         <div className="flex flex-row">
           <RegistrationButton />
-          <div className="font-black ml-3 mt-3">(Due March 16th, 2026!)</div>
+          <div className="font-black ml-3 mt-2">(Due March 16th, 2026!)</div>
         </div>
       </div>
     </div>
