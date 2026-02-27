@@ -65,7 +65,7 @@ export default function Registration() {
         cc: formData.personalEmail ? formData.personalEmail : undefined,
         name: formData.fullName,
       }
-      const response = await fetch('/api/registrationConfirmed', {
+      const response = await fetch('https://fraserhacks-automated-email.vercel.app/api/registrationConfirmed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
