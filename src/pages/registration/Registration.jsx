@@ -144,6 +144,7 @@ export default function Registration() {
                     value={formData.experience}
                     onChange={(v) => updateField("experience", v)}
                   />
+                  <p className="text-white/60 text-sm mb-4">No experience required.</p>
                   <TShirtSizeSelector
                     id="tshirt-size"
                     value={formData.tshirtSize}
@@ -151,7 +152,6 @@ export default function Registration() {
                     required
                     error={submitAttempted && !formData.tshirtSize.trim()}
                   />
-                  <p className="text-white/60 text-sm mb-4">No experience required.</p>
                   <AuthField
                     label="Dietary restrictions"
                     id="dietary"
