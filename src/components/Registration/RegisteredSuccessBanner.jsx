@@ -29,7 +29,7 @@ export default function RegisteredSuccessBanner({ onDismiss }) {
       <GradientBorder className="w-full" compact>
         <div className="flex items-center justify-between gap-4">
           <span className="font-semibold text-white text-base">
-          Check your email for a confirmation email from hi@fraserhacks.dev in a couple weeks!
+          Check your email for a confirmation email from hi@fraserhacks.dev! It might be in your junk/spam folder.
           </span>
           <button
             type="button"
