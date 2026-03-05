@@ -5,7 +5,7 @@ import MinecraftNumbers from "../MinecraftNumbers";
 const DEFAULT_FAQ = [
   {
     q: "WHO IS THIS EVENT FOR?",
-    a: "We accept people of all skill levels and experiences! Anyone with an open mindset can participate. You don't need CS experience either! Whether you are a beginner or a pro, or a programmer, builder, or designer, this hackathon is for you!",
+    a: "We accept people of all skill levels and experiences! Anyone with an open mindset can participate 🧠. You don't need programming experience either! Whether you are a beginner or a pro, or a programmer, builder, or designer, this hackathon is for you!",
   },
   {
     q: "WILL THERE BE FOOD?",
@@ -13,7 +13,7 @@ const DEFAULT_FAQ = [
   },
   {
     q: "DO I NEED A TEAM?",
-    a: "You can go solo or participate with a team up with up to 4 individuals! Don't have a team but want to be part of one? We will have a networking opportunity to make teams at the beginning of hackathon!",
+    a: "You can go solo or participate with a team up with up to 4 individuals 👥! Don't have a team but want to be part of one? We will have a networking opportunity to make teams at the beginning of hackathon!",
   },
   {
     q: "WHERE CAN I FIND DIRECTIONS TO THE BUILDING?",
@@ -21,15 +21,15 @@ const DEFAULT_FAQ = [
   },
   {
     q: "WILL THERE BE PRIZES?",
-    a: "Yes!! There will be prizes for the top 3 projects as well as for various categories that you can compete in!",
+    a: "Yes!! There will be prizes for the top 3 projects as well as for various categories that you can compete in! 🏆🎁",
   },
   {
     q: "WHAT DO I NEED TO BRING?",
-    a: "A device to create your project on, chargers, and yourself!",
+    a: "A device (💻) to create your project on, chargers, and yourself 🙌! A mobile data connection/hotspot isn't at all necessary, but may prove beneficial.",
   },
   {
     q: "ANY QUESTIONS WE DIDN'T ANSWER?",
-    a: "You can contact us at hi@fraserhacks.dev if you have any more questions.",
+    a: "You can contact us at hi@fraserhacks.dev 📧 if you have any more questions.",
   },
 ];
 
