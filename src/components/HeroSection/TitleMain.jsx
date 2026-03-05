@@ -32,6 +32,15 @@ export default function TitleMain() {
         </div>
         <div className="flex flex-row items-center gap-1.5 mb-5">
           <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location" id="tooltip"/>
+          <div className="font-black mr-2">John Fraser SS • No fees required</div>
+        </div>
+        <div className="flex flex-row mb-5">
+          <RegistrationButton />
+          <div className="font-black ml-3 mt-2">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
+        </div>
+        <div className="flex flex-col text-sm md:text-base lg:text-lg xl:text-xl">
+          <div>Want to learn more? Check out our Instagram (@fraser.hacks)!</div>
+          <div id="tooltip" className="decoration-dotted">Are you a non-JFSS student?</div>
           <Tooltip
             anchorSelect="#tooltip"
             style={{
@@ -46,11 +55,6 @@ export default function TitleMain() {
             }}
             content="Non-JFSS students must be accompanied and supervised by a teacher from their respective school. If you have a teacher who's willing to come and supervise a group of students from your school, ask them to contact hi@fraserhacks.dev or DM us at fraser.hacks for further info!"
           />
-          <div className="font-black mr-2">John Fraser SS</div>
-        </div>
-        <div className="flex flex-row">
-          <RegistrationButton />
-          <div className="font-black ml-3 mt-2">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
         </div>
       </div>
     </div>
