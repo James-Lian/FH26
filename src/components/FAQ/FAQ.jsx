@@ -5,19 +5,19 @@ import MinecraftNumbers from "../MinecraftNumbers";
 const DEFAULT_FAQ = [
   {
     q: "WHO IS THIS EVENT FOR?",
-    a: "Anyone with an open mindset can participate. If you are a beginner at programming, designing, pitching or even quite experienced, this hackathon is for you!",
+    a: "We accept people of all skill levels and experiences! Anyone with an open mindset can participate. You don't need CS experience either! Whether you are a beginner or a pro, or a programmer, builder, or designer, this hackathon is for you!",
   },
   {
     q: "WILL THERE BE FOOD?",
-    a: "Yep! We love free food",
+    a: "Yep! Lunch and dinner will be provided. We love free food ❤",
   },
   {
     q: "DO I NEED A TEAM?",
-    a: "You can go solo or participate with a team up with up to 4 individuals! Don't have a team but want to be part of one? You can specify while signing up that you would like to be part of a team and we will also have networking opportunity to make teams at the beginning of hackathon!",
+    a: "You can go solo or participate with a team up with up to 4 individuals! Don't have a team but want to be part of one? We will have a networking opportunity to make teams at the beginning of hackathon!",
   },
   {
     q: "WHERE CAN I FIND DIRECTIONS TO THE BUILDING?",
-    a: "The hackathon is being held at 2665 Erin Centre Blvd, Mississauga, ON L5M 5H6, inside the cafeteria and library.",
+    a: "The hackathon will be held inside John Fraser's cafeteria. The school is located at 2665 Erin Centre Blvd, Mississauga, ON L5M 5H6.",
   },
   {
     q: "WILL THERE BE PRIZES?",
