@@ -13,8 +13,8 @@ import IntroText from "./components/Intro/IntroText";
 import Recap3D from "./components/Recap/Recap3d";
 import RecapText from "./components/Recap/RecapComponents/RecapText/RecapText";
 import RecapProjects from "./components/Recap/RecapComponents/RecapProjects/RecapProjects";
-// import Sponsers from "./components/Sponsers/Sponsers";
-// import Sponsors3D from "./components/Sponsers/Sponsers3D";
+import Sponsers from "./components/Sponsers/Sponsers";
+import Sponsors3D from "./components/Sponsers/Sponsers3D";
 import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
@@ -72,7 +72,7 @@ function HomePage() {
         {!isMobile && <MouseLight />}
         {!isMobile && <Background />}
 
-        <ScrollControls pages={5} damping={0.15}>
+        <ScrollControls pages={6} damping={0.15}>
           <ScrollController />
 
           <Scroll>
@@ -85,9 +85,9 @@ function HomePage() {
               </Suspense>
             </group>
             <Recap3D />
-            {/* <group position={[0, -20, 0]}>
+            <group position={[0, -12, 0]}>
               <Sponsors3D />
-            </group> */}
+            </group>
           </Scroll>
 
           {/* HTML overlay that scrolls */}
@@ -105,12 +105,16 @@ function HomePage() {
               <RecapText />
               <RecapProjects />
             </section>
-            <section style={{ height: "100vh", width: "100vw" }}>
+            <section
+              style={{
+                height: "100vh",
+                width: "100vw",
+                // On mobile, nudge FAQ up slightly so it appears a bit earlier while scrolling
+                marginTop: isMobile ? "-30vh" : 0,
+              }}
+            >
               <FAQ />
             </section>
-            {/* <section style={{ height: "200vh", width: "100vw" }}>
-              <Sponsers />
-            </section> */}
           </Scroll>
         </ScrollControls>
       </Canvas>
