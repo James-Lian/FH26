@@ -38,9 +38,9 @@ export default function TitleMain() {
           <RegistrationButton />
           <div className="font-black ml-3 mt-2">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
         </div>
-        <div className="flex flex-col text-sm md:text-base lg:text-lg xl:text-xl">
+        <div className="flex flex-col text-xs md:text-sm lg:text-base xl:text-lg font-normal">
           <div>Want to learn more? Check out our Instagram (@fraser.hacks)!</div>
-          <div id="tooltip" className="decoration-dotted">Are you a non-JFSS student?</div>
+          <div className="underline decoration-dotted" id="tooltip">Are you a non-JFSS student?</div>
           <Tooltip
             anchorSelect="#tooltip"
             style={{
