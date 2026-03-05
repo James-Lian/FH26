@@ -28,7 +28,7 @@ export default function TitleMain() {
         </div>
         <div className="flex flex-row items-center gap-1.5">
           <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location" />
-          <div className="font-black mr-2">John Fraser Secondary School</div>
+          <div className="font-black mr-2">John Fraser SS</div>
         </div>
         <div className="flex flex-row mb-5">
           <div className="font-black mr-2">Largest Mississauga highschool hackathon</div>
