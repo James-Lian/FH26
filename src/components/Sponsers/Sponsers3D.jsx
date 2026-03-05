@@ -11,24 +11,25 @@ const sponsors = [
   {
     id: 1,
     tier: "gold",
+    link: "http://streetsvillerotary.com/",
+    imagePath: "images/Sponsors/Rotary.png",
+    name: "Rotary Streetsville",
+  },
+  {
+    id: 2,
+    tier: "gold",
     link: "https://johnfraser.peelschools.org/",
     imagePath: "/images/Sponsors/JFSS.png",
     name: "John Fraser Secondary School",
   },
   {
-    id: 2,
+    id: 3,
     tier: "gold",
     link: "https://www.peelschools.org/advanced-placement",
     imagePath: "/images/Sponsors/AP.png",
-    name: "Advanced Placement Program",
+    name: "Peel Advanced Placement Program",
   },
-  {
-    id: 3,
-    tier: "gold",
-    link: "http://streetsvillerotary.com/",
-    imagePath: "images/Sponsors/Rotary.png",
-    name: "Rotary Streetsville",
-  },
+
 
 //   // SILVER (4)
 //   { id: 4, tier: "silver", link: "https://silver2.com", imagePath: "" },
