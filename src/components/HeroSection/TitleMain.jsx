@@ -26,6 +26,10 @@ export default function TitleMain() {
         <div>
           <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event
         </div>
+        <div className="flex flex-row items-center gap-1">
+          <img src="/icons/map-pin.png" alt="location" />
+          <div className="font-black mr-2">John Fraser Secondary School</div>
+        </div>
         <div className="flex flex-row mb-5">
           <div className="font-black mr-2">Largest Mississauga highschool hackathon</div>
         </div>
