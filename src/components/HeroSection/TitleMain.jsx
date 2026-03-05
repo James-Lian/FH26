@@ -23,7 +23,7 @@ export default function TitleMain() {
       <h1 className="text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-100 via-fuchsia-300 to-purple-500 ">
         <MinecraftNumbers>FraserHacks26</MinecraftNumbers>
       </h1>
-      <div className="text-base md:text-lg lg:text-xl xl:text-2xl">
+      <div className="text-base md:text-lg lg:text-xl xl:text-2xl mt-2">
         <div className="flex flex-row">
           <div className="font-black mr-2">Mississauga's largest high school hackathon</div>
         </div>
