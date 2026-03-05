@@ -29,7 +29,7 @@ const DEFAULT_FAQ = [
   },
   {
     q: "WILL HARDWARE BE PROVIDED?",
-    a: "For hardware hackers or teams looking to incorporate specialized hardware for their IoT/robotics/etc. projects, we encourage you to bring your own tools and equipment ⚙️🕹️! We are working to see if we can provide some basic components or kits, but we cannot guarantee provision of any specific tools. If YOU want to build with something specific, bring it! 🚀"
+    a: "For hardware hackers or teams looking to incorporate specialized hardware for their IoT/robotics/etc. projects, we encourage you to bring your own tools and equipment ⚙️🕹️! We may provide some basic components or kits, but we cannot guarantee provision of any specific tools. If YOU want to build with something specific, bring it! 🚀"
   },
   {
     q: "ANY QUESTIONS WE DIDN'T ANSWER?",
