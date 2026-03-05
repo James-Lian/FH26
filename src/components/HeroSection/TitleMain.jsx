@@ -27,8 +27,7 @@ export default function TitleMain() {
           <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event
         </div>
         <div className="flex flex-row mb-5">
-          <div className="font-black mr-2">Largest</div>
-          <div>Mississauga highschool hackathon</div>
+          <div className="font-black mr-2">Largest Mississauga highschool hackathon</div>
         </div>
         <div className="flex flex-row">
           <RegistrationButton />
