@@ -58,6 +58,27 @@ export default function Registration() {
       additionalQuestions: formData.additionalQuestions,
     });
     navigate("/", { state: { registrationSuccess: true } });
+
+    try {
+      const data = {
+        to: formData.schoolEmail,
+        cc: formData.personalEmail ? formData.personalEmail : undefined,
+        name: formData.fullName,
+      }
+      const response = await fetch('https://fraserhacks-automated-email.vercel.app/api/registrationConfirmed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log("Success");
+      } else {
+        console.log('Error');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {

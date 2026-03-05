@@ -23,12 +23,15 @@ export default function TitleMain() {
         <MinecraftNumbers>FraserHacks26</MinecraftNumbers>
       </h1>
       <div className="text-base md:text-lg lg:text-xl xl:text-2xl">
+        <div className="flex flex-row">
+          <div className="font-black mr-2">Mississauga's largest high school hackathon</div>
+        </div>
         <div>
           <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event
         </div>
-        <div className="flex flex-row mb-5">
-          <div className="font-black mr-2">Largest</div>
-          <div>Mississauga highschool hackathon</div>
+        <div className="flex flex-row items-center gap-1.5 mb-5">
+          <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location" />
+          <div className="font-black mr-2">John Fraser SS</div>
         </div>
         <div className="flex flex-row">
           <RegistrationButton />
