@@ -43,7 +43,7 @@ export default function TitleMain() {
             <img src="/icons/instagram.png" className="h-[1em] w-[1em]" alt="instagram"/>
             <div>Want to learn more? Check out our Instagram!</div>
           </a>
-          <span className="underline decoration-dotted underline-offset-3 inline-block" id="tooltip">Are you a non-JFSS student?</span>
+          <span className="underline decoration-dotted underline-offset-3" id="tooltip">Are you a non-JFSS student?</span>
           <Tooltip
             anchorSelect="#tooltip"
             style={{
