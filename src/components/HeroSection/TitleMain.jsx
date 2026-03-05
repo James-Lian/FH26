@@ -1,5 +1,6 @@
 import RegistrationButton from "../Navbar/RegistrationButton";
 import MinecraftNumbers from "../MinecraftNumbers";
+import { Tooltip } from 'react-tooltip'
 
 export default function TitleMain() {
   return (
@@ -30,7 +31,21 @@ export default function TitleMain() {
           <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person event
         </div>
         <div className="flex flex-row items-center gap-1.5 mb-5">
-          <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location" />
+          <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location" id="tooltip"/>
+          <Tooltip
+            anchorSelect="#tooltip"
+            style={{
+              maxWidth: '300px',
+              backgroundColor: '#333333',
+              opacity:'0.5',
+              color: '#fff',
+              padding: '10px',
+              borderRadius: '5px',
+              fontSize: '15px',
+              zIndex: '999',
+            }}
+            content="Non-JFSS students must be accompanied and supervised by a teacher from their respective school. If you have a teacher who's willing to come and supervise a group of students from your school, ask them to contact hi@fraserhacks.dev or DM us at fraser.hacks for further info!"
+          />
           <div className="font-black mr-2">John Fraser SS</div>
         </div>
         <div className="flex flex-row">
