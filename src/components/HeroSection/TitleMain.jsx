@@ -34,7 +34,7 @@ export default function TitleMain() {
           <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location"/>
           <div className="font-black mr-2">John Fraser SS • No fees required</div>
         </div>
-        <div className="flex flex-row mb-3">
+        <div className="flex flex-row mb-2">
           <RegistrationButton />
           <div className="font-black ml-3 mt-2">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
         </div>
@@ -43,7 +43,7 @@ export default function TitleMain() {
             <img src="/icons/instagram.png" className="h-[1em] w-[1em]" alt="instagram"/>
             <div>Want to learn more? Check out our Instagram!</div>
           </a>
-          <div className="underline decoration-dotted underline-offset-3" id="tooltip">Are you a non-JFSS student?</div>
+          <span className="underline decoration-dotted underline-offset-3" id="tooltip">Are you a non-JFSS student?</span>
           <Tooltip
             anchorSelect="#tooltip"
             style={{
@@ -56,7 +56,7 @@ export default function TitleMain() {
               fontSize: '15px',
               zIndex: '999',
             }}
-            content="Non-JFSS students must be accompanied and supervised by a teacher from their respective school. If you have a teacher who's willing to come and supervise a group of students from your school, ask them to contact hi@fraserhacks.dev or DM us at fraser.hacks for further info!"
+            content="Non-JFSS students MUST be accompanied and supervised by a teacher from their respective school. If you have a teacher who's willing to come and supervise a group of students from your school, ask them to contact hi@fraserhacks.dev or DM us at fraser.hacks for further info!"
           />
         </div>
       </div>
