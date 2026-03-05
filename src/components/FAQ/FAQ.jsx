@@ -13,7 +13,7 @@ const DEFAULT_FAQ = [
   },
   {
     q: "DO I NEED A TEAM?",
-    a: "You can go solo or participate with a team up with up to 4 individuals 👥! Don't have a team but want to be part of one? We will have a networking opportunity to make teams at the beginning of hackathon!",
+    a: "You can go solo or participate with a team up with up to 4 individuals! Don't have a team but want to be part of one? We will have a networking opportunity to make teams at the beginning of hackathon!",
   },
   {
     q: "WHERE CAN I FIND DIRECTIONS TO THE BUILDING?",
@@ -29,7 +29,7 @@ const DEFAULT_FAQ = [
   },
   {
     q: "ANY QUESTIONS WE DIDN'T ANSWER?",
-    a: "You can contact us at hi@fraserhacks.dev 📧 if you have any more questions.",
+    a: "You can contact us at hi@fraserhacks.dev 📧 if you have any questions or concerns.",
   },
 ];
 
