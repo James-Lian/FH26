@@ -40,7 +40,7 @@ export default function TitleMain() {
         </div>
         <div className="flex flex-col text-xs md:text-sm lg:text-base xl:text-lg font-normal">
           <div>Want to learn more? Check out our Instagram (@fraser.hacks)!</div>
-          <div className="underline decoration-dotted" id="tooltip">Are you a non-JFSS student?</div>
+          <div className="underline decoration-dotted underline-offset-1" id="tooltip">Are you a non-JFSS student?</div>
           <Tooltip
             anchorSelect="#tooltip"
             style={{
