@@ -5,7 +5,7 @@ import MinecraftNumbers from "../MinecraftNumbers";
 const DEFAULT_FAQ = [
   {
     q: "WHO IS THIS EVENT FOR?",
-    a: "We accept people of all skill levels and experiences! Anyone with an open mindset can participate 🧠. You don't need programming experience either! Whether you are a beginner or a pro, or a programmer, builder, or designer, this hackathon is for you!",
+    a: "We accept highschoolers of all skill levels and experiences! Anyone with an open mindset can participate 🧠. You don't need programming experience either! Whether you are a beginner or a pro, or a programmer, builder, or designer, this hackathon is for you!",
   },
   {
     q: "WILL THERE BE FOOD?",

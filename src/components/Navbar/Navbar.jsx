@@ -108,7 +108,6 @@ export default function Navbar() {
             <NavItem label="Recap" onClick={() => scrollToVH(240)} />
             <NavItem label="FAQ" onClick={() => scrollToVH(370)} />
             <NavItem label="Sponsors" onClick={() => scrollToVH(500)} />  
-            <RegistrationButton />
           </div>
 
           {/* Mobile menu - visible on small screens when open */}
@@ -154,8 +153,6 @@ export default function Navbar() {
                   setMenuOpen(false);
                 }}
               />
-            <RegistrationButton />
-
             </div>
           </div>
         </GlassContainer>
