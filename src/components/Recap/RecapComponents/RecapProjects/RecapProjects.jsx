@@ -34,13 +34,13 @@ function RecapProjects() {
         },
         {
             image: "/images/Projects/FraserhacksLogicraft.png",
-            makerName: "Creator Name",
+            makerName: "shaan Kelkar, Vivaan Sugandh, Jerry Zeng, Aryan Vasudevan",
             projectName: "Logicraft",
             link: "https://devpost.com/software/logicraft"
         },
         {
             image: "/images/Projects/FraserhacksMartialVision.jpg",
-            makerName: "Creator Name",
+            makerName: "Victor Yu, Hasan Mustafa, EimaiOKanenas, Anshuman Routray",
             projectName: "MartialVision",
             link: "https://devpost.com/software/martialvision"
         }
