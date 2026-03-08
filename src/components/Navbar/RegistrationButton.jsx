@@ -12,9 +12,9 @@ function RegistrationButton() {
 
       <div className="flex flex-col">
         <div className="relative z-10">Register</div>
-        <div className="text-xs">(PDSB-only)</div>
+        <div className="relative z-10 text-xs">(PDSB-only)</div>
       </div>
-      <span> &gt;&gt;</span>
+      <span className="relative z-10"> &gt;&gt;</span>
     </a>
   );
 }
