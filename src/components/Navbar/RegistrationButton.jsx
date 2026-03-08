@@ -1,7 +1,9 @@
 function RegistrationButton() {
   return (
     <a
-      href="/registration"
+      href="https://forms.gle/VWB6fc2MUEkT6px86"
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative inline-flex items-center justify-center px-5 py-2 font-semibold text-white rounded-lg group no-underline"
     >
       <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500"></span>
