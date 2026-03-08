@@ -34,7 +34,7 @@ export default function TitleMain() {
           <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location"/>
           <div className="font-black mr-2">John Fraser SS • No fees required</div>
         </div>
-        <div className="flex flex-row mb-3">
+        <div className="flex flex-row mb-3 items-center">
           <RegistrationButton />
           <div className="font-black ml-3 mt-2">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
         </div>
