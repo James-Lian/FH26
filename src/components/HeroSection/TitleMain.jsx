@@ -36,7 +36,7 @@ export default function TitleMain() {
         </div>
         <div className="flex flex-row mb-3 items-center">
           <RegistrationButton />
-          <div className="font-black ml-3 mt-2">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
+          <div className="font-black ml-3">Due <MinecraftNumbers>Sunday, March 15th, 2026</MinecraftNumbers>!</div>
         </div>
         <div className="flex flex-col text-xs md:text-sm lg:text-base xl:text-lg font-normal">
           <a className="flex flex-row gap-1.5 items-center cursor-pointer hover:underline hover:underline-offset-3" target="_blank" href="https://www.instagram.com/fraser.hacks/" rel="noopener noreferrer">
