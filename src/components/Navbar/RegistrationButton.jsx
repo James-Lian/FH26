@@ -14,7 +14,7 @@ function RegistrationButton() {
         <div className="relative z-10">Register</div>
         <div className="relative z-10 text-xs">(PDSB-only)</div>
       </div>
-      <span className="relative z-10 ml-3">&gt;&gt;</span>
+      <span className="relative z-10 ml-2">&gt;&gt;</span>
     </a>
   );
 }
