@@ -10,7 +10,11 @@ function RegistrationButton() {
 
       <span className="absolute inset-[2px] rounded-2xl bg-gradient-to-r from-purple-950 via-pink-950 to-gray-950 transition-all duration-300 group-hover:opacity-0"></span>
 
-      <span className="relative z-10">Register &gt;&gt;</span>
+      <div className="flex flex-col">
+        <div className="relative z-10">Register</div>
+        <div className="text-xs">(PDSB-only)</div>
+      </div>
+      <span> &gt;&gt;</span>
     </a>
   );
 }
