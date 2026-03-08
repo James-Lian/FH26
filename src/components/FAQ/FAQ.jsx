@@ -9,7 +9,7 @@ const DEFAULT_FAQ = [
   },
   {
     q: "WILL THERE BE FOOD?",
-    a: "Yep! Lunch and dinner will be provided. We love free food ❤",
+    a: "Yep! Lunch and dinner will be provided. We love free food 💜",
   },
   {
     q: "DO I NEED A TEAM?",
