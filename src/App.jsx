@@ -19,6 +19,7 @@ import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
 import Registration from "./pages/registration/Registration";
+import ScannerX7P4N2 from "./pages/scanner/ScannerX7P4N2";
 import RegisteredSuccessBanner from "./components/Registration/RegisteredSuccessBanner";
 
 // Lazy load heavy 3D components
@@ -127,6 +128,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/registration" element={<Registration />} />
+      <Route path="/scanner-x7p4n2" element={<ScannerX7P4N2 />} />
     </Routes>
   );
 }
