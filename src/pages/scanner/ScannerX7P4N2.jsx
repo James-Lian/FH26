@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import jsQR from "jsqr";
+import RegisteredSuccessBanner from "../../components/Registration/RegisteredSuccessBanner";
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyZQw3PSHMlFecEA19IioqNeqf0cNkyWYJW376DhAULWFgROvnUSIIIZOPCW8v5Yjm8dg/exec";
@@ -38,6 +39,7 @@ export default function ScannerX7P4N2() {
 
   const [actionLoading, setActionLoading] = useState("");
   const [confirmation, setConfirmation] = useState("");
+  const [successBanner, setSuccessBanner] = useState(null);
 
   const videoRef = useRef(null);
   const rafIdRef = useRef(null);
@@ -127,10 +129,25 @@ export default function ScannerX7P4N2() {
       });
 
       setLookupResult(data);
-      setConfirmation(data.message || "Updated successfully.");
+
+      const row = data?.row || lookupResult?.row;
+      const name =
+        row?.fullName ||
+        row?.name ||
+        row?.Name ||
+        row?.["Full Name"] ||
+        row?.["full name"] ||
+        "Participant";
+      const checkedFor = type === "attendance" ? "present" : type;
+
+      const successMessage =
+        data.message || `${name} checked in for ${checkedFor}.`;
+      setConfirmation(successMessage);
+      setSuccessBanner({ name, checkedFor, message: successMessage });
 
       setTimeout(() => {
         resetToScanner();
+        setSuccessBanner(null);
       }, 1800);
     } catch (e) {
       setError(e?.message || "Update failed.");
@@ -311,19 +328,90 @@ export default function ScannerX7P4N2() {
   const renderRowDetails = () => {
     const row = lookupResult?.row;
     if (!row) return null;
-
+  
+    const getColumnValue = (...keys) => {
+      for (const key of keys) {
+        if (!key) continue;
+  
+        if (row[key] !== undefined && row[key] !== null && row[key] !== "") {
+          return row[key];
+        }
+  
+        const lowerKey = String(key).toLowerCase();
+        const upperKey = String(key).toUpperCase();
+  
+        if (
+          row[lowerKey] !== undefined &&
+          row[lowerKey] !== null &&
+          row[lowerKey] !== ""
+        ) {
+          return row[lowerKey];
+        }
+  
+        if (
+          row[upperKey] !== undefined &&
+          row[upperKey] !== null &&
+          row[upperKey] !== ""
+        ) {
+          return row[upperKey];
+        }
+      }
+  
+      return "";
+    };
+  
+    const parseBool = (value) => {
+      if (typeof value === "boolean") return value;
+      if (typeof value === "number") return value !== 0;
+      if (typeof value === "string") {
+        const t = value.trim().toLowerCase();
+        return t === "true" || t === "yes" || t === "1";
+      }
+      return false;
+    };
+  
+    // Your main summary fields
+    const studentEmail = getColumnValue("A", "Student email", "Email", "email");
+    const fullName = getColumnValue("B", "Full Name", "Name", "fullName", "name");
+    const school = getColumnValue("C", "School", "school");
+    const rsvp = getColumnValue("D", "RSVP", "rsvp");
+    const attendance = parseBool(getColumnValue("E", "Attendance", "attendance"));
+    const lunch = parseBool(getColumnValue("F", "Lunch", "lunch"));
+    const dinner = parseBool(getColumnValue("G", "Dinner", "dinner"));
+    const dietary = getColumnValue(
+      "H",
+      "Dietary Restrictions",
+      "Dietary",
+      "dietary",
+      "dietaryRestrictions",
+    );
+    const arduino = parseBool(getColumnValue("I", "Arduino", "arduino"));
+  
     return (
       <div className="w-full rounded-2xl border border-white/10 bg-white/5 p-4">
-        <div className="text-lg font-bold mb-3">Match found</div>
-
+        <div className="mb-3">
+          <div className="text-lg font-bold">Match found</div>
+        </div>
+  
+        {/* Main operator summary */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-          {Object.entries(row).map(([key, value]) => (
+          {[
+            ["Student email", studentEmail],
+            ["Full name", fullName],
+            ["School", school],
+            ["RSVP", rsvp],
+            ["Attendance", attendance ? "Yes" : "No"],
+            ["Lunch", lunch ? "Yes" : "No"],
+            ["Dinner", dinner ? "Yes" : "No"],
+            ["Dietary restrictions", dietary],
+            ["Arduino", arduino ? "Yes" : "No"],
+          ].map(([label, value]) => (
             <div
-              key={key}
+              key={label}
               className="rounded-xl border border-white/10 bg-black/20 p-3"
             >
               <div className="text-xs uppercase tracking-wide text-white/50">
-                {key}
+                {label}
               </div>
               <div className="mt-1 text-sm break-words">
                 {String(value ?? "")}
@@ -331,36 +419,48 @@ export default function ScannerX7P4N2() {
             </div>
           ))}
         </div>
-
+  
         <div className="mt-5 flex flex-wrap gap-3 justify-center">
           <button
             type="button"
-            disabled={!!actionLoading}
+            disabled={!!actionLoading || attendance}
             onClick={() => handleAction("attendance")}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-500 disabled:opacity-50"
+            className={`px-4 py-2 rounded-lg font-bold ${
+              attendance
+                ? "bg-gray-500 text-white cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-500"
+            }`}
           >
             {actionLoading === "attendance" ? "Saving..." : "Attendance"}
           </button>
-
+  
           <button
             type="button"
-            disabled={!!actionLoading}
+            disabled={!!actionLoading || lunch}
             onClick={() => handleAction("lunch")}
-            className="px-4 py-2 rounded-lg bg-amber-600 text-white font-bold hover:bg-amber-500 disabled:opacity-50"
+            className={`px-4 py-2 rounded-lg font-bold ${
+              lunch
+                ? "bg-gray-500 text-white cursor-not-allowed"
+                : "bg-amber-600 text-white hover:bg-amber-500"
+            }`}
           >
             {actionLoading === "lunch" ? "Saving..." : "Lunch"}
           </button>
-
+  
           <button
             type="button"
-            disabled={!!actionLoading}
+            disabled={!!actionLoading || dinner}
             onClick={() => handleAction("dinner")}
-            className="px-4 py-2 rounded-lg bg-emerald-600 text-white font-bold hover:bg-emerald-500 disabled:opacity-50"
+            className={`px-4 py-2 rounded-lg font-bold ${
+              dinner
+                ? "bg-gray-500 text-white cursor-not-allowed"
+                : "bg-emerald-600 text-white hover:bg-emerald-500"
+            }`}
           >
             {actionLoading === "dinner" ? "Saving..." : "Dinner"}
           </button>
         </div>
-
+  
         <div className="mt-4 flex justify-center">
           <button
             type="button"
@@ -428,6 +528,15 @@ export default function ScannerX7P4N2() {
         ) : null}
 
         {lookupResult ? renderRowDetails() : null}
+
+        {successBanner ? (
+          <RegisteredSuccessBanner
+            name={successBanner.name}
+            checkedFor={successBanner.checkedFor}
+            message={successBanner.message}
+            onDismiss={() => setSuccessBanner(null)}
+          />
+        ) : null}
 
         {confirmation ? (
           <div className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-center text-sm text-emerald-200">

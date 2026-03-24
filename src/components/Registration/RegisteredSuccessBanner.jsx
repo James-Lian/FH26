@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import GradientBorder from "./GradientBorder";
 
-export default function RegisteredSuccessBanner({ onDismiss }) {
+export default function RegisteredSuccessBanner({
+  onDismiss,
+  name,
+  checkedFor,
+  message,
+}) {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
@@ -29,7 +34,11 @@ export default function RegisteredSuccessBanner({ onDismiss }) {
       <GradientBorder className="w-full" compact>
         <div className="flex items-center justify-between gap-4">
           <span className="font-semibold text-white text-base">
-          Check your email for a confirmation email from hi@fraserhacks.dev! It might be in junk/spam.
+            {message
+              ? message
+              : name
+                ? `${name} is checked in for ${checkedFor || "attendance"}.`
+                : "Check your email for a confirmation email from hi@fraserhacks.dev! It might be in junk/spam."}
           </span>
           <button
             type="button"
