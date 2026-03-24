@@ -7,72 +7,94 @@ import { extend, useThree } from "@react-three/fiber";
 import Astronaut from "../3dAssets/Astronaut";
 
 const sponsors = [
-  // GOLD (2)
   {
     id: 1,
-    tier: "gold",
+    tier: "Platinum",
+    link: "https://windscribe.com/",
+    imagePath: "images/Sponsors/windscribe.png",
+    name: "Windscribe",
+  },
+  {
+    id: 2,
+    tier: "Platinum",
     link: "http://streetsvillerotary.com/",
     imagePath: "images/Sponsors/Rotary.png",
     name: "Rotary Streetsville",
   },
   {
-    id: 2,
-    tier: "gold",
+    id: 3,
+    tier: "Platinum",
     link: "https://johnfraser.peelschools.org/",
     imagePath: "/images/Sponsors/JFSS.png",
     name: "John Fraser Secondary School",
   },
   {
-    id: 3,
-    tier: "gold",
+    id: 4,
+    tier: "Platinum",
     link: "https://www.peelschools.org/advanced-placement",
     imagePath: "/images/Sponsors/AP.png",
     name: "Peel Advanced Placement Program",
   },
 
-
-//   // SILVER (4)
-//   { id: 4, tier: "silver", link: "https://silver2.com", imagePath: "" },
-//   { id: 5, tier: "silver", link: "https://silver3.com", imagePath: "" },
-//   { id: 6, tier: "silver", link: "https://silver4.com", imagePath: "" },
-
-//   // BRONZE (6)
-//   { id: 7, tier: "bronze", link: "https://bronze1.com", imagePath: "" },
-//   { id: 8, tier: "bronze", link: "https://bronze2.com", imagePath: "" },
-//   { id: 9, tier: "bronze", link: "https://bronze3.com", imagePath: "" },
-//   { id: 10, tier: "bronze", link: "https://bronze4.com", imagePath: "" },
-//   { id: 11, tier: "bronze", link: "https://bronze5.com", imagePath: "" },
-//   { id: 12, tier: "bronze", link: "https://bronze6.com", imagePath: "" },
-
-//   // OTHER (5)
-//   { id: 13, tier: "other", link: "https://other1.com", imagePath: "" },
-//   { id: 14, tier: "other", link: "https://other2.com", imagePath: "" },
-//   { id: 15, tier: "other", link: "https://other3.com", imagePath: "" },
-//   { id: 16, tier: "other", link: "https://other4.com", imagePath: "" },
-//   { id: 17, tier: "other", link: "https://other5.com", imagePath: "" },
+  {
+    id: 5,
+    tier: "Other",
+    link: "https://appwizzy.com/",
+    imagePath: "/images/Sponsors/Appwizzy.png",
+    name: "App Wizzy",
+  },
+  {
+    id: 6,
+    tier: "Other",
+    link: "https://www.interviewcake.com/",
+    imagePath: "/images/Sponsors/interview_cake.png",
+    name: "Interview Cake",
+  },
+  {
+    id: 7,
+    tier: "Other",
+    link: "https://www.letsroam.com/",
+    imagePath: "/images/Sponsors/letsroam.avif",
+    name: "Lets Roam",
+  },
+  {
+    id: 8,
+    tier: "Other",
+    link: "https://artofproblemsolving.com/company",
+    imagePath: "/images/Sponsors/aops.png",
+    name: "Art of Problem Solving",
+  },
+  {
+    id: 9,
+    tier: "Other",
+    link: "https://codecrafters.io/",
+    imagePath: "/images/Sponsors/codecrafters.png",
+    name: "Code Crafters",
+  },
+  {
+    id: 10,
+    tier: "Other",
+    link: "https://gen.xyz/",
+    imagePath: "/images/Sponsors/xyz.png",
+    name: "XYZ",
+  },
 ];
 
-const tierOrder = ["gold", "silver", "bronze", "other"];
+const tierOrder = ["Platinum", "Other"];
 const tierLabels = {
-  gold: "Sponsors!!",
-  silver: "Silver Sponsors",
-  bronze: "Bronze Sponsors",
-  other: "Other Sponsors",
+  Platinum: "Platinum Sponsors!!",
+  Other: "Other Sponsors!!",
 };
 
 // sizes + columns
 const tileSpec = {
-  gold: { w: 12, h: 1.7, cols: 1 },
-  silver: { w: 6, h: 1.45, cols: 2 },
-  bronze: { w: 4, h: 1.3, cols: 3 },
-  other: { w: 3, h: 1.15, cols: 4 },
+  Platinum: { w: 12, h: 1.7, cols: 1 },
+  Other: { w: 6, h: 1.35, cols: 2 },
 };
 
 const tierAccent = {
-  gold: "#ffefba",
-  silver: "#ebebeb",
-  bronze: "#e8bc90",
-  other: "#ffffff",
+  Platinum: "#feeeff",
+  Other: "#cccccc",
 };
 
 function groupByTier(list) {
@@ -118,7 +140,7 @@ const UnderlineFadeMaterial = shaderMaterial(
     float a = vy * hx * topSoft * uOpacity;
     gl_FragColor = vec4(uColor, a);
   }
-  `
+  `,
 );
 
 extend({ UnderlineFadeMaterial });
@@ -155,9 +177,18 @@ function UnderlineLight({ width, color, y }) {
 export default function Sponsors3D({ position = [0, -16, 0] }) {
   const { viewport } = useThree();
   const grouped = useMemo(() => groupByTier(sponsors), []);
-  
+
   // Scale tiles smaller on small screens (viewport.width < 8 is roughly < 768px)
-  const tileScale = viewport.width < 6 ? 0.2 :(viewport.width < 8 ? 0.4 : (viewport.width < 10 ? 0.6 : (viewport.width < 12 ? 0.8:1)));
+  const tileScale =
+    viewport.width < 6
+      ? 0.3
+      : viewport.width < 8
+        ? 0.4
+        : viewport.width < 10
+          ? 0.6
+          : viewport.width < 12
+            ? 0.8
+            : 1;
   const isNarrow = viewport.width < 8;
   // On mobile, make section title bigger (1.5x relative to scaled content)
   const titleFontSize = isNarrow ? 0.5 / tileScale : 1;
@@ -171,14 +202,14 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
   const gapX = 0.4;
   const gapY = 0.6;
   const titleGap = 0.9;
-  const sectionGap = 1.4;
+  const sectionGap = !isNarrow ? 1.4 : 2;
 
   // First pass: calculate total height to center everything
   let totalHeight = 0;
   for (const tier of tierOrder) {
     const items = grouped[tier] || [];
     if (!items.length) continue;
-    
+
     totalHeight += titleGap; // Title gap
     const { w, h, cols } = tileSpec[tier];
     const adjustedH = h * heightMultiplier;
@@ -208,7 +239,7 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
         color="#ffffff"
       >
         {tierLabels[tier]}
-      </Text>
+      </Text>,
     );
 
     nodes.push(
@@ -217,7 +248,7 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
         width={14}
         color={tierAccent[tier]}
         y={cursorY + titleYOffset}
-      />
+      />,
     );
 
     cursorY -= titleGap;
@@ -247,7 +278,7 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
           y={y}
           z={0}
           tileScale={tileScale}
-        />
+        />,
       );
     });
 
@@ -258,15 +289,20 @@ export default function Sponsors3D({ position = [0, -16, 0] }) {
   // Adjust Y position to anchor the top (title) to a fixed position regardless of scale
   // When scaled down, we need to move the group up to compensate so the top stays in place
   const adjustedPosition = [
-    position[0], 
-    position[1] + (1 - tileScale) * 2, 
-    position[2]
+    position[0],
+    position[1] + (1 - tileScale) * 2,
+    position[2],
   ];
 
-  return <group position={adjustedPosition} scale={tileScale}>{nodes}         <Astronaut
-  position={[isNarrow ? 7 : 3, isNarrow ? 7 : -2, 1]}
-  lightOffset={[-2, -3, 2]}
-  intensity={1}
-  scale={0.00025 / tileScale}
-/></group>
+  return (
+    <group position={adjustedPosition} scale={tileScale}>
+      {nodes}{" "}
+      <Astronaut
+        position={[isNarrow ? 7 : 3, isNarrow ? 7 : -2, 1]}
+        lightOffset={[-2, -3, 2]}
+        intensity={1}
+        scale={0.00025 / tileScale}
+      />
+    </group>
+  );
 }

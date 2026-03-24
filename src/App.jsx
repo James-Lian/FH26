@@ -73,7 +73,7 @@ function HomePage() {
         {!isMobile && <MouseLight />}
         {!isMobile && <Background />}
 
-        <ScrollControls pages={6} damping={0.15}>
+        <ScrollControls pages={7} damping={0.15}>
           <ScrollController />
 
           <Scroll>
@@ -86,7 +86,7 @@ function HomePage() {
               </Suspense>
             </group>
             <Recap3D />
-            <group position={[0, -12, 0]}>
+            <group position={[0, -18, 0]}>
               <Sponsors3D />
             </group>
           </Scroll>

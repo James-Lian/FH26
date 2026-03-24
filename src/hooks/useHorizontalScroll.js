@@ -8,8 +8,8 @@ const HORIZONTAL_SCROLL_CONFIG = {
   transitionSpeed: 0.05,
   scrollDeltaScale: 0.01,
   recapSection: {
-    start: 0.4,
-    end: 0.41,
+    start: 0.34,
+    end: 0.35,
     entryBuffer: 0.08,
   },
 };
@@ -87,7 +87,7 @@ export const useHorizontalScroll = () => {
 
         targetHorizontalOffset.current = Math.max(
           minOffset,
-          Math.min(maxOffset, currentOffset + horizontalDelta)
+          Math.min(maxOffset, currentOffset + horizontalDelta),
         );
 
         return false;
@@ -106,17 +106,22 @@ export const useHorizontalScroll = () => {
     };
 
     const handleTouchMove = (event) => {
-      if (event.touches.length === 1 && scrollApi?.el && lastTouchX.current !== null && lastTouchY.current !== null) {
+      if (
+        event.touches.length === 1 &&
+        scrollApi?.el &&
+        lastTouchX.current !== null &&
+        lastTouchY.current !== null
+      ) {
         const currentX = event.touches[0].clientX;
         const currentY = event.touches[0].clientY;
         const deltaX = currentX - lastTouchX.current;
         const deltaY = currentY - lastTouchY.current;
-        
+
         // Determine if swipe is primarily horizontal or vertical
         const absDeltaX = Math.abs(deltaX);
         const absDeltaY = Math.abs(deltaY);
         const isVerticalSwipe = absDeltaY > absDeltaX;
-        
+
         const scrollProgress = scroll?.offset || 0;
         const { start, end, entryBuffer } = recapSection;
         const inRecapSection =
@@ -164,7 +169,7 @@ export const useHorizontalScroll = () => {
 
             targetHorizontalOffset.current = Math.max(
               minOffset,
-              Math.min(maxOffset, currentOffset + horizontalDelta)
+              Math.min(maxOffset, currentOffset + horizontalDelta),
             );
           } else {
             // Not in recap section - allow normal scrolling
@@ -186,7 +191,7 @@ export const useHorizontalScroll = () => {
           const scrollAmount = -deltaY * 0.8; // Scale factor for scroll speed
           scrollApi.el.scrollBy({
             top: scrollAmount,
-            behavior: "auto"
+            behavior: "auto",
           });
         } else {
           // Update tracking even if we don't handle it (outside recap section)
@@ -207,7 +212,7 @@ export const useHorizontalScroll = () => {
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: false });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
-    
+
     return () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
@@ -251,7 +256,7 @@ export const useHorizontalScroll = () => {
         setIsHorizontalMode(false);
       } else {
         setIsHorizontalMode(true);
-        const target = scroll.el.scrollHeight * 0.35;
+        const target = scroll.el.scrollHeight * 0.3;
         scroll.el.scrollTo({ top: target, behavior: "instant" });
         scrollDirection.current = null;
       }
