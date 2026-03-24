@@ -128,7 +128,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/registration" element={<Registration />} />
-      {/* <Route path="/scanner-x7p4n2" element={<ScannerX7P4N2 />} /> */}
+      <Route path="/scanner-x7p4n2" element={<ScannerX7P4N2 />} />
     </Routes>
   );
 }
