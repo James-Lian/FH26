@@ -68,7 +68,7 @@ const sponsors = [
     id: 9,
     tier: "Other",
     link: "https://codecrafters.io/",
-    imagePath: "/images/Sponsors/codecrafters.png",
+    imagePath: "/images/Sponsors/codecrafters.svg",
     name: "Code Crafters",
   },
   {
