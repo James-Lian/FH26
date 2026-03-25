@@ -78,6 +78,13 @@ const sponsors = [
     imagePath: "/images/Sponsors/xyz.png",
     name: "XYZ",
   },
+  {
+    id: 11,
+    tier: "Other",
+    link: "https://athenachat.bot/chatbot",
+    imagePath: "/images/Sponsors/athena.png",
+    name: "Athena Chat",
+  },
 ];
 
 const tierOrder = ["Platinum", "Other"];
