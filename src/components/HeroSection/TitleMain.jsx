@@ -28,7 +28,7 @@ export default function TitleMain() {
           <div className="font-black mr-2">Mississauga's largest high school hackathon</div>
         </div>
         <div>
-          <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person <MinecraftNumbers>(8am–7pm)</MinecraftNumbers>
+          <MinecraftNumbers>March 26, 2026</MinecraftNumbers> • In-person <MinecraftNumbers>(8am–6pm)</MinecraftNumbers>
         </div>
         <div className="flex flex-row items-center gap-1.5 mb-5">
           <img src="/icons/map-pin.png" className="h-[1em] w-[1em]" alt="location"/>
