@@ -110,7 +110,7 @@ export default function ScannerX7P4N2() {
     try {
       const data = await callAppsScript({
         action: "find",
-        token: cleanToken,
+        token: cleanToken.toUpperCase(),
       });
 
       setLookupResult(data);
