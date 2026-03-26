@@ -455,10 +455,10 @@ export default function ScannerX7P4N2() {
               className="rounded-xl border border-white/10 bg-black/20 p-3"
             >
               <div className="text-sm uppercase tracking-wide text-white/50">
-                <MinecraftNumbers>{label}</MinecraftNumbers>
+                {label}
               </div>
               <div className="mt-1 text-lg break-words">
-                {String(value ?? "")}
+                <MinecraftNumbers>{String(value ?? "")}</MinecraftNumbers>
               </div>
             </div>
           ))}
@@ -637,7 +637,7 @@ export default function ScannerX7P4N2() {
         {lookupLoading ? (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
             <div className="text-lg font-bold">Looking up token...</div>
-            <div className="text-sm text-white/70 mt-2"><MinecraftNumbers>{token}</MinecraftNumbers></div>
+            <div className="text-lg text-white/70 mt-2"><MinecraftNumbers>{token}</MinecraftNumbers></div>
           </div>
         ) : null}
 
