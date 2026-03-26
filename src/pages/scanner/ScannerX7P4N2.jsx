@@ -573,24 +573,6 @@ export default function ScannerX7P4N2() {
                   Retry
                 </button>
               </div>
-            ) : (
-              <div className="relative rounded-2xl overflow-hidden bg-black/30 border border-white/10">
-                <video
-                  ref={videoRef}
-                  playsInline
-                  muted
-                  autoPlay
-                  style={{ transform: isMirrored ? "scaleX(-1)" : "none" }}
-                  className="w-full aspect-[4/3] object-cover"
-                />
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                  <div className="w-10/12 max-w-sm h-10/12 max-h-md border-4 border-white/60 rounded-xl shadow-[0_0_0_3px_rgba(255,255,255,0.08)]" />
-                </div>
-                {scanning && (
-                  <div className="absolute left-3 bottom-3 text-xs text-white/70 bg-black/20 rounded-lg px-2 py-1">
-                    Scanning...
-                  </div>
-                )}
             ) : searchMode === "qr" ? (
               <>
                 <div className="flex flex-col gap-3 items-center text-center mb-4">
@@ -606,6 +588,9 @@ export default function ScannerX7P4N2() {
                     playsInline
                     muted
                     autoPlay
+                    style={{
+                      transform: isMirrored ? "scaleX(-1)" : "none",
+                    }}
                     className="w-full aspect-[4/3] object-cover"
                   />
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
