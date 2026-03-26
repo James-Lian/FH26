@@ -41,6 +41,8 @@ export default function ScannerX7P4N2() {
   const [confirmation, setConfirmation] = useState("");
   const [successBanner, setSuccessBanner] = useState(null);
 
+  const [isMirrored, setIsMirrored] = useState(false);
+
   const videoRef = useRef(null);
   const rafIdRef = useRef(null);
   const streamRef = useRef(null);
@@ -205,6 +207,15 @@ export default function ScannerX7P4N2() {
 
         video.srcObject = stream;
         await video.play();
+
+        const videoTrack = stream.getVideoTracks()[0];
+        const settings = videoTrack.getSettings();
+        
+        // If facingMode is 'user', it's a front/laptop cam. 
+        // If facingMode isn't supported, we can fallback to checking label for "front"
+        const isFrontCam = settings.facingMode === 'user' || (settings.label && settings.label.toLowerCase().includes('front')) || (settings.label && settings.label.toLowerCase().includes('webcam'));
+        
+        setIsMirrored(isFrontCam);
 
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
@@ -505,6 +516,7 @@ export default function ScannerX7P4N2() {
                   playsInline
                   muted
                   autoPlay
+                  style={{ transform: isMirrored ? "scaleX(-1)" : "none" }}
                   className="w-full aspect-[4/3] object-cover"
                 />
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
