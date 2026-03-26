@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import jsQR from "jsqr";
 import RegisteredSuccessBanner from "../../components/Registration/RegisteredSuccessBanner";
-import MinecraftNumbers from "../MinecraftNumbers";
+import MinecraftNumbers from "../../components/MinecraftNumbers";
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyZQw3PSHMlFecEA19IioqNeqf0cNkyWYJW376DhAULWFgROvnUSIIIZOPCW8v5Yjm8dg/exec";
