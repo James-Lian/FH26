@@ -454,14 +454,12 @@ export default function ScannerX7P4N2() {
               key={label}
               className="rounded-xl border border-white/10 bg-black/20 p-3"
             >
-              <MinecraftNumbers>
-                <div className="text-xs uppercase tracking-wide text-white/50">
-                  {label}
-                </div>
-                <div className="mt-1 text-sm break-words">
-                  {String(value ?? "")}
-                </div>
-              </MinecraftNumbers>
+              <div className="text-xs uppercase tracking-wide text-white/50">
+                <MinecraftNumbers>{label}</MinecraftNumbers>
+              </div>
+              <div className="mt-1 text-sm break-words">
+                {String(value ?? "")}
+              </div>
             </div>
           ))}
         </div>
@@ -614,17 +612,15 @@ export default function ScannerX7P4N2() {
                     Paste a token or QR URL, then click Lookup.
                   </div>
                 </div>
-                <MinecraftNumbers>
-                  <input
-                    value={manualToken}
-                    onChange={(e) => setManualToken(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") handleManualLookup();
-                    }}
-                    placeholder="Paste token or link"
-                    className="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white text-lg placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
-                  />
-                </MinecraftNumbers>
+                <input
+                  value={manualToken}
+                  onChange={(e) => setManualToken(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleManualLookup();
+                  }}
+                  placeholder="Paste token or link"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white text-lg placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                />
                 <button
                   type="button"
                   onClick={handleManualLookup}
