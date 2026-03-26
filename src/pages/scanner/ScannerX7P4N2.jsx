@@ -33,6 +33,8 @@ export default function ScannerX7P4N2() {
   const [error, setError] = useState("");
   const [scanning, setScanning] = useState(false);
   const [scanSession, setScanSession] = useState(0);
+  const [searchMode, setSearchMode] = useState("qr"); // "qr" | "token"
+  const [manualToken, setManualToken] = useState("");
 
   const [lookupLoading, setLookupLoading] = useState(false);
   const [lookupResult, setLookupResult] = useState(null);
@@ -66,6 +68,9 @@ export default function ScannerX7P4N2() {
     setActionLoading("");
     setConfirmation("");
     setError("");
+    setManualToken("");
+    setSearchMode("qr");
+    setScanning(false);
     setScanSession((s) => s + 1);
   };
 
@@ -112,6 +117,27 @@ export default function ScannerX7P4N2() {
     } finally {
       setLookupLoading(false);
     }
+  };
+
+  const handleManualLookup = async () => {
+    const raw = String(manualToken ?? "").trim();
+    if (!raw) {
+      setError("Enter a token to search.");
+      return;
+    }
+
+    const cleanToken = normalizeToken(raw);
+    if (!cleanToken) {
+      setError("Enter a token to search.");
+      return;
+    }
+
+    setToken(cleanToken);
+    setScanning(false);
+    setLookupResult(null);
+    setConfirmation("");
+    setError("");
+    await lookupToken(raw);
   };
 
   const handleAction = async (type) => {
@@ -315,7 +341,12 @@ export default function ScannerX7P4N2() {
       }
     }
 
-    start();
+    if (searchMode === "qr") {
+      start();
+    } else {
+      setScanning(false);
+      stopCamera();
+    }
 
     return () => {
       cancelled = true;
@@ -323,7 +354,7 @@ export default function ScannerX7P4N2() {
       rafIdRef.current = null;
       stopCamera();
     };
-  }, [scanSession, constraints]);
+  }, [scanSession, constraints, searchMode]);
 
   const renderRowDetails = () => {
     const row = lookupResult?.row;
@@ -402,6 +433,7 @@ export default function ScannerX7P4N2() {
             ["RSVP", rsvp],
             ["Attendance", attendance ? "Yes" : "No"],
             ["Lunch", lunch ? "Yes" : "No"],
+            ["Lunch", lunch ? "Yes" : "No"],
             ["Dinner", dinner ? "Yes" : "No"],
             ["Dietary restrictions", dietary],
             ["Arduino", arduino ? "Yes" : "No"],
@@ -479,11 +511,37 @@ export default function ScannerX7P4N2() {
       <div className="w-full max-w-3xl">
         {!token && !lookupLoading && !lookupResult ? (
           <>
-            <div className="flex flex-col gap-3 items-center text-center mb-4">
-              <div className="text-2xl font-bold">Scan QR code</div>
-              <div className="text-sm text-white/70">
-                Point your camera at a QR code.
-              </div>
+            <div className="flex w-full justify-center gap-2 mb-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchMode("qr");
+                  setError("");
+                  setScanning(false);
+                }}
+                className={`px-4 py-2 rounded-lg font-bold transition ${
+                  searchMode === "qr"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white/5 text-white/80 hover:bg-white/10"
+                }`}
+              >
+                Scan QR
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchMode("token");
+                  setError("");
+                  setScanning(false);
+                }}
+                className={`px-4 py-2 rounded-lg font-bold transition ${
+                  searchMode === "token"
+                    ? "bg-emerald-600 text-white"
+                    : "bg-white/5 text-white/80 hover:bg-white/10"
+                }`}
+              >
+                Search by token
+              </button>
             </div>
 
             {error ? (
@@ -492,29 +550,72 @@ export default function ScannerX7P4N2() {
                 <div className="text-sm text-white/70 mb-4">{error}</div>
                 <button
                   type="button"
-                  onClick={() => setScanSession((s) => s + 1)}
+                  onClick={() => {
+                    if (searchMode === "qr") {
+                      setScanSession((s) => s + 1);
+                    } else {
+                      handleManualLookup();
+                    }
+                  }}
                   className="px-4 py-2 rounded-lg bg-white text-black font-bold hover:bg-white/90"
                 >
                   Retry
                 </button>
               </div>
-            ) : (
-              <div className="relative rounded-2xl overflow-hidden bg-black/30 border border-white/10">
-                <video
-                  ref={videoRef}
-                  playsInline
-                  muted
-                  autoPlay
-                  className="w-full aspect-[4/3] object-cover"
-                />
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                  <div className="w-10/12 max-w-sm h-10/12 max-h-md border-4 border-white/60 rounded-xl shadow-[0_0_0_3px_rgba(255,255,255,0.08)]" />
-                </div>
-                {scanning && (
-                  <div className="absolute left-3 bottom-3 text-xs text-white/70 bg-black/20 rounded-lg px-2 py-1">
-                    Scanning...
+            ) : searchMode === "qr" ? (
+              <>
+                <div className="flex flex-col gap-3 items-center text-center mb-4">
+                  <div className="text-2xl font-bold">Scan QR code</div>
+                  <div className="text-sm text-white/70">
+                    Point your camera at a QR code.
                   </div>
-                )}
+                </div>
+
+                <div className="relative rounded-2xl overflow-hidden bg-black/30 border border-white/10">
+                  <video
+                    ref={videoRef}
+                    playsInline
+                    muted
+                    autoPlay
+                    className="w-full aspect-[4/3] object-cover"
+                  />
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <div className="w-10/12 max-w-sm h-10/12 max-h-md border-4 border-white/60 rounded-xl shadow-[0_0_0_3px_rgba(255,255,255,0.08)]" />
+                  </div>
+                  {scanning && (
+                    <div className="absolute left-3 bottom-3 text-xs text-white/70 bg-black/20 rounded-lg px-2 py-1">
+                      Scanning...
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="rounded-2xl overflow-hidden bg-black/30 border border-white/10 p-5">
+                <div className="flex flex-col gap-2 items-center text-center mb-4">
+                  <div className="text-2xl font-bold">Search by token</div>
+                  <div className="text-sm text-white/70">
+                    Paste a token or QR URL, then click Lookup.
+                  </div>
+                </div>
+
+                <input
+                  value={manualToken}
+                  onChange={(e) => setManualToken(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleManualLookup();
+                  }}
+                  placeholder="Paste token or link"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                />
+
+                <button
+                  type="button"
+                  onClick={handleManualLookup}
+                  disabled={lookupLoading}
+                  className="mt-4 w-full px-4 py-3 rounded-lg bg-white text-black font-bold hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {lookupLoading ? "Looking up..." : "Lookup"}
+                </button>
               </div>
             )}
           </>
