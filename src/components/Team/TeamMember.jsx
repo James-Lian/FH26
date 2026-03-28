@@ -133,7 +133,6 @@ export default function TeamMember({ member }) {
           {member.position ? (
             <div className="text-sm text-fuchsia-200/70">{member.position}</div>
           ) : null}
-          <p className="mt-1 break-all text-sm text-fuchsia-300/80">{member.email}</p>
           <div className="mt-2 flex flex-wrap items-center gap-1">
             <a
               href={`mailto:${member.email}`}
