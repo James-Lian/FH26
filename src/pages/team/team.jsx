@@ -196,7 +196,7 @@ const sectors = [
   },
   {
     sectorName: "Tech",
-    description: "Website, registration, attendance, and technical support for the hackathon. lonely section :(",
+    description: "Website, registration, attendance, and technical support for the hackathon. lonely section 😔",
     teamMembers: [
       {
         name: "Jason Chou",
