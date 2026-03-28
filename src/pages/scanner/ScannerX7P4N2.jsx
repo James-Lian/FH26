@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import jsQR from "jsqr";
 import RegisteredSuccessBanner from "../../components/Registration/RegisteredSuccessBanner";
+import MinecraftNumbers from "../../components/MinecraftNumbers";
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyZQw3PSHMlFecEA19IioqNeqf0cNkyWYJW376DhAULWFgROvnUSIIIZOPCW8v5Yjm8dg/exec";
@@ -110,7 +111,7 @@ export default function ScannerX7P4N2() {
     try {
       const data = await callAppsScript({
         action: "find",
-        token: cleanToken,
+        token: cleanToken.toUpperCase(),
       });
 
       setLookupResult(data);
@@ -453,11 +454,11 @@ export default function ScannerX7P4N2() {
               key={label}
               className="rounded-xl border border-white/10 bg-black/20 p-3"
             >
-              <div className="text-xs uppercase tracking-wide text-white/50">
+              <div className="text-sm uppercase tracking-wide text-white/50">
                 {label}
               </div>
-              <div className="mt-1 text-sm break-words">
-                {String(value ?? "")}
+              <div className="mt-1 text-lg break-words">
+                <MinecraftNumbers>{String(value ?? "")}</MinecraftNumbers>
               </div>
             </div>
           ))}
@@ -611,7 +612,6 @@ export default function ScannerX7P4N2() {
                     Paste a token or QR URL, then click Lookup.
                   </div>
                 </div>
-
                 <input
                   value={manualToken}
                   onChange={(e) => setManualToken(e.target.value)}
@@ -619,9 +619,8 @@ export default function ScannerX7P4N2() {
                     if (e.key === "Enter") handleManualLookup();
                   }}
                   placeholder="Paste token or link"
-                  className="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-white text-lg placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
                 />
-
                 <button
                   type="button"
                   onClick={handleManualLookup}
@@ -638,7 +637,7 @@ export default function ScannerX7P4N2() {
         {lookupLoading ? (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
             <div className="text-lg font-bold">Looking up token...</div>
-            <div className="text-sm text-white/70 mt-2">{token}</div>
+            <div className="text-lg text-white/70 mt-2"><MinecraftNumbers>{token}</MinecraftNumbers></div>
           </div>
         ) : null}
 
