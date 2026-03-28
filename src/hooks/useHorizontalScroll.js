@@ -33,6 +33,13 @@ export const subscribeToHorizontalOffset = (callback) => {
 let allowNavbarScroll = false;
 
 // Function for Navbar to trigger scroll
+export const NAV_SECTION_SCROLL_VH = {
+  intro: 120,
+  recap: 240,
+  faq: 370,
+  sponsors: 500,
+};
+
 export const scrollFromNavbar = (vh) => {
   allowNavbarScroll = true; // temporarily allow vertical scroll
   scrollApi.el.scrollTo({
@@ -40,6 +47,22 @@ export const scrollFromNavbar = (vh) => {
     behavior: "smooth",
   });
   setTimeout(() => (allowNavbarScroll = false), 800);
+};
+
+/** Call after navigating to home so ScrollControls / scrollApi is mounted first. */
+export const scrollFromNavbarWhenReady = (vh) => {
+  let attempts = 0;
+  const maxAttempts = 60;
+  const tryScroll = () => {
+    if (scrollApi?.el) {
+      scrollFromNavbar(vh);
+      return;
+    }
+    if (attempts >= maxAttempts) return;
+    attempts += 1;
+    window.setTimeout(tryScroll, 50);
+  };
+  tryScroll();
 };
 
 export const useHorizontalScroll = () => {

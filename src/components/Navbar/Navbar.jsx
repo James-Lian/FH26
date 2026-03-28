@@ -1,11 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { scrollFromNavbar } from "../../hooks/useHorizontalScroll";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  scrollFromNavbar,
+  NAV_SECTION_SCROLL_VH,
+} from "../../hooks/useHorizontalScroll";
 import GlassContainer from "../Recap/RecapComponents/RecapProjects/GlassContainer";
 import NavItem from "./NavItem";
 import RegistrationButton from "./RegistrationButton";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const scrollToVH = (vh) => scrollFromNavbar(vh);
+
+  const goToHomeSection = (vh) => {
+    if (location.pathname === "/") {
+      scrollToVH(vh);
+    } else {
+      navigate("/", { state: { scrollVH: vh } });
+    }
+  };
+
+  const goHome = () => {
+    goToHomeSection(0);
+  };
 
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -76,7 +94,7 @@ export default function Navbar() {
       <div className="flex flex-row justify-center items-center w-full pt-0">
         <GlassContainer className="flex justify-between items-center w-4/5 mt-4 md:mt-6 lg:mt-8 py-3 px-8 md:py-4 md:px-12 lg:py-4 lg:px-16 text-white relative">
           <div className="text-lg md:text-xl lg:text-2xl">
-            <NavItem label="FH26" onClick={() => scrollToVH(0)} />
+            <NavItem label="FH26" onClick={goHome} />
           </div>
 
           {/* Hamburger button - visible on small screens only */}
@@ -104,10 +122,23 @@ export default function Navbar() {
 
           {/* Desktop navigation - hidden on small screens */}
           <div className="hidden md:flex flex-row items-center justify-center gap-4 md:gap-5 lg:gap-6 text-sm md:text-base lg:text-lg">
-            <NavItem label="Intro" onClick={() => scrollToVH(120)} />
-            <NavItem label="Recap" onClick={() => scrollToVH(240)} />
-            <NavItem label="FAQ" onClick={() => scrollToVH(370)} />
-            <NavItem label="Sponsors" onClick={() => scrollToVH(500)} />  
+            <NavItem
+              label="Intro"
+              onClick={() => goToHomeSection(NAV_SECTION_SCROLL_VH.intro)}
+            />
+            <NavItem
+              label="Recap"
+              onClick={() => goToHomeSection(NAV_SECTION_SCROLL_VH.recap)}
+            />
+            <NavItem
+              label="FAQ"
+              onClick={() => goToHomeSection(NAV_SECTION_SCROLL_VH.faq)}
+            />
+            <NavItem
+              label="Sponsors"
+              onClick={() => goToHomeSection(NAV_SECTION_SCROLL_VH.sponsors)}
+            />
+            <NavItem label="Team" onClick={() => navigate("/team")} />
           </div>
 
           {/* Mobile menu - visible on small screens when open */}
@@ -128,28 +159,35 @@ export default function Navbar() {
               <NavItem
                 label="Intro"
                 onClick={() => {
-                  scrollToVH(120);
+                  goToHomeSection(NAV_SECTION_SCROLL_VH.intro);
                   setMenuOpen(false);
                 }}
               />
               <NavItem
                 label="Recap"
                 onClick={() => {
-                  scrollToVH(240);
+                  goToHomeSection(NAV_SECTION_SCROLL_VH.recap);
                   setMenuOpen(false);
                 }}
               />
               <NavItem
                 label="FAQ"
                 onClick={() => {
-                  scrollToVH(370);
+                  goToHomeSection(NAV_SECTION_SCROLL_VH.faq);
                   setMenuOpen(false);
                 }}
               />
               <NavItem
                 label="Sponsors"
                 onClick={() => {
-                  scrollToVH(500);
+                  goToHomeSection(NAV_SECTION_SCROLL_VH.sponsors);
+                  setMenuOpen(false);
+                }}
+              />
+              <NavItem
+                label="Team"
+                onClick={() => {
+                  navigate("/team");
                   setMenuOpen(false);
                 }}
               />

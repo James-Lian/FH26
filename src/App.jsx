@@ -18,8 +18,10 @@ import Sponsors3D from "./components/Sponsers/Sponsers3D";
 import FAQ from "./components/FAQ/FAQ";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollController from "./components/Navbar/ScrollController";
+import { scrollFromNavbarWhenReady } from "./hooks/useHorizontalScroll";
 import Registration from "./pages/registration/Registration";
 import ScannerX7P4N2 from "./pages/scanner/ScannerX7P4N2";
+import TeamPage from "./pages/team/team";
 import RegisteredSuccessBanner from "./components/Registration/RegisteredSuccessBanner";
 
 // Lazy load heavy 3D components
@@ -34,11 +36,33 @@ function HomePage() {
   );
 
   useEffect(() => {
-    if (location.state?.registrationSuccess) {
+    const s = location.state;
+    if (!s || typeof s !== "object") return;
+
+    let nextState = { ...s };
+    let didSomething = false;
+
+    if (s.registrationSuccess) {
       setShowSuccessBanner(true);
-      navigate(location.pathname, { replace: true, state: {} });
+      delete nextState.registrationSuccess;
+      didSomething = true;
     }
-  }, [location.state?.registrationSuccess, location.pathname, navigate]);
+
+    const vh = s.scrollVH;
+    if (vh != null && typeof vh === "number") {
+      scrollFromNavbarWhenReady(vh);
+      delete nextState.scrollVH;
+      didSomething = true;
+    }
+
+    if (!didSomething) return;
+
+    const keys = Object.keys(nextState);
+    navigate(location.pathname, {
+      replace: true,
+      state: keys.length > 0 ? nextState : {},
+    });
+  }, [location.state, location.pathname, navigate]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -129,6 +153,7 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/registration" element={<Registration />} />
       <Route path="/scanner-x7p4n2" element={<ScannerX7P4N2 />} />
+      <Route path="/team" element={<TeamPage />} />
     </Routes>
   );
 }
