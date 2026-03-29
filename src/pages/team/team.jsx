@@ -78,7 +78,7 @@ const sectors = [
   },
   {
     sectorName: "Marketing",
-    description: "Outreach, branding, and promotion across channels.",
+    description: "Outreach, branding, and promotion across channels. Maggie designed all our beautiful merch!",
     teamMembers: [
       {
         name: "Amrita",
@@ -90,7 +90,7 @@ const sectors = [
       },
       {
         name: "Maggie",
-        position: "Assistant Director",
+        position: "Lead Designer",
         email: "760897@pdsb.net",
         imagePath: "/images/Team/ying.webp",
         roleTier: "assistantDirector",
